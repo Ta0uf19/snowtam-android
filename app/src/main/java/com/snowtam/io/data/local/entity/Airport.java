@@ -9,18 +9,19 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "airports"
 //        foreignKeys = @ForeignKey(entity = Search.class,
 //        parentColumns = "searchId",
-//        childColumns = "searchId",
+//        childColumns = "fksearchId",
 //        onDelete = ForeignKey.CASCADE)
 )
 public class Airport {
 
-    @NonNull
     @PrimaryKey
+    @NonNull
     private String airportCode;
+
     private String name;
     private double lat;
     private double log;
-    private long searchId;
+    private long fksearchId;
 
     // another specific info to add here (item C,..) (as embedded objects)
     @Embedded
@@ -57,6 +58,14 @@ public class Airport {
         this.snowtam = snowtam;
     }
 
+    public long getFksearchId() {
+        return fksearchId;
+    }
+
+    public void setFksearchId(long fksearchId) {
+        this.fksearchId = fksearchId;
+    }
+
     @Override
     public String toString() {
         return "Airport{" +
@@ -64,15 +73,8 @@ public class Airport {
                 ", name='" + name + '\'' +
                 ", lat=" + lat +
                 ", log=" + log +
+                ", fksearchId=" + fksearchId +
                 ", snowtam=" + snowtam +
                 '}';
-    }
-
-    public long getSearchId() {
-        return searchId;
-    }
-
-    public void setSearchId(long searchId) {
-        this.searchId = searchId;
     }
 }

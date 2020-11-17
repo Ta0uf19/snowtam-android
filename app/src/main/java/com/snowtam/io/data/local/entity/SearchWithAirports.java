@@ -12,25 +12,14 @@ import java.util.List;
 
 public class SearchWithAirports {
     @Embedded
-    private Search search;
+    public Search search;
 
-    @Relation(parentColumn = "searchId", entityColumn = "airportCode")
-    private List<Airport> airports;
+    @Relation(parentColumn = "searchId", entityColumn = "fksearchId", entity = Airport.class)
+    public List<Airport> airports;
 
-    public void setSearch(Search search) {
+    public SearchWithAirports(Search search, List<Airport> airports) {
         this.search = search;
-    }
-
-    public void setAirports(List<Airport> airports) {
         this.airports = airports;
-    }
-
-    public Search getSearch() {
-        return search;
-    }
-
-    public List<Airport> getAirports() {
-        return airports;
     }
 
     @Override

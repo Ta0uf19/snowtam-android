@@ -10,6 +10,7 @@ public class Search {
 
     @PrimaryKey(autoGenerate = true)
     private long searchId;
+
     private Date date;
 
     public Search() {
