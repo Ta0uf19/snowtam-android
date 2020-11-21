@@ -37,7 +37,7 @@
                motion:framePosition="20"
                android:alpha="0" />
        </KeyFrameSet>
-        <OnClick motion:targetId="@+id/editText_Search" />
+
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
