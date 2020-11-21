@@ -44,4 +44,8 @@ dependencies {
     // LiveData testing
     androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
     androidTestImplementation 'com.jraska.livedata:testing:1.1.2'
+
+    //cardView + recycleView for optimal lists
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
 }
