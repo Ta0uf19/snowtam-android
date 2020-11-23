@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.snowtam.io.R;
+import com.snowtam.io.ui.main.adapter.DataAdapterRecentResearch;
+import com.snowtam.io.ui.main.adapter.DataAdapterSearch;
 
 import java.util.ArrayList;
 
