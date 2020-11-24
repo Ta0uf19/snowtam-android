@@ -47,7 +47,10 @@ public class DataAdapterSearch extends RecyclerView.Adapter<DataAdapterSearch.my
 
         if(i == 0 ){
             myViewHolder.iv_remove.setVisibility(View.INVISIBLE);
-        }
+        }else
+            myViewHolder.iv_remove.setVisibility(View.VISIBLE);
+
+
         myViewHolder.iv_remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

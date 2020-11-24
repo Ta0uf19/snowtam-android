@@ -1,6 +1,7 @@
 package com.snowtam.io.ui.main;
 
 import androidx.constraintlayout.motion.widget.MotionLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +31,7 @@ public class MainFragment extends Fragment {
     private MainViewModel mViewModel;
     //list of strings coming from the ViewModel , this list contains the codes that we are going to search
     private ArrayList<String> list_et_search = new ArrayList<>();
-    //list of Airport coming from the ViewModel
+    //list of Airport coming from the ViewModel (TODO change with SearchWithAirports)
     private ArrayList<String> list_recent_research = new ArrayList<>();
 
 
@@ -37,6 +39,7 @@ public class MainFragment extends Fragment {
     private MotionLayout motionLayout;
     private EditText etSearch;
     private Button buttonAddSearch;
+    private Button buttonSubmit;
     private DataAdapterSearch dataAdapterSearch;
     private DataAdapterRecentResearch dataAdapterRecentResearch;
     private RecyclerView recyclerViewSearch;
@@ -52,17 +55,10 @@ public class MainFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
 
-        motionLayout = (MotionLayout) view.findViewById(R.id.main);
-        buttonAddSearch = (Button) view.findViewById(R.id.button_add_et_search);
-        recyclerViewSearch = (RecyclerView) view.findViewById(R.id.recyclerView_editText_search);
-        recyclerViewSearch.setHasFixedSize(true);
-        LinearLayoutManager layoutManagerSearch = new LinearLayoutManager(getActivity());
-        recyclerViewSearch.setLayoutManager(layoutManagerSearch);
+        //ViewModel
+        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
-        recyclerViewRecentResearch = (RecyclerView) view.findViewById(R.id.recyclerView_editText_recent_research);
-        recyclerViewRecentResearch.setHasFixedSize(true);
-        LinearLayoutManager layoutManagerRecentResearch = new LinearLayoutManager(getActivity());
-        recyclerViewRecentResearch.setLayoutManager(layoutManagerRecentResearch);
+        initComponent(view);
 
         // we are null to display the fist EditText search
         list_et_search.add(null);
@@ -86,14 +82,36 @@ public class MainFragment extends Fragment {
             }
         });
 
+        buttonSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Navigation.findNavController(view).navigate(R.id.action_listFragment_to_addFragment);
+            }
+        });
+
         return view;
+    }
+
+    private void initComponent(View view) {
+        motionLayout = (MotionLayout) view.findViewById(R.id.main);
+        buttonAddSearch = (Button) view.findViewById(R.id.button_add_et_search);
+        buttonSubmit = (Button) view.findViewById(R.id.button_submit);
+        recyclerViewSearch = (RecyclerView) view.findViewById(R.id.recyclerView_editText_search);
+        recyclerViewRecentResearch = (RecyclerView) view.findViewById(R.id.recyclerView_editText_recent_research);
+
+        recyclerViewSearch.setHasFixedSize(true);
+        recyclerViewRecentResearch.setHasFixedSize(true);
+        LinearLayoutManager layoutManagerSearch = new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManagerRecentResearch = new LinearLayoutManager(getActivity());
+        recyclerViewSearch.setLayoutManager(layoutManagerSearch);
+        recyclerViewRecentResearch.setLayoutManager(layoutManagerRecentResearch);
     }
 
     private RecyclerView.OnItemTouchListener getTouchListener() {
         return new RecyclerView.OnItemTouchListener() {
             @Override
             public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                motionLayout.transitionToEnd();
+                motionLayout.transitionToState(R.id.end);
                 return false;
             }
 
@@ -108,12 +126,6 @@ public class MainFragment extends Fragment {
         };
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        // TODO: Use the ViewModel
-    }
 
 
 
