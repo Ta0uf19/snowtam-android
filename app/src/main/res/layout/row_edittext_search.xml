@@ -10,8 +10,7 @@
 
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/shape_et_search"
 
         android:drawableStart="@drawable/ic_search"
