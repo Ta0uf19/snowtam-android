@@ -1,6 +1,6 @@
 package com.snowtam.io.data.local.entity;
 
-public class Snowtam {
+public class SnowtamItem {
 
     // attribute (A, B, C..)
     private String attr;
@@ -13,4 +13,12 @@ public class Snowtam {
 
     // picture
     private String picture;
+
+
+    public SnowtamItem(String attr, String name_attr, String value, String picture) {
+        this.attr = attr;
+        this.name_attr = name_attr;
+        this.value = value;
+        this.picture = picture;
+    }
 }

@@ -1,36 +1,41 @@
-package com.snowtam.io.data.local.entity;
+package com.snowtam.io.utils;
 
+import com.snowtam.io.data.local.entity.SnowtamItem;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Snowtam {
+public final class SnowtamDecoder {
+    private SnowtamDecoder(String coded) { }
 
-    // coded string
-    private String coded;
+    // A -> value
+    static Map<String, String> map = new HashMap<String, String>();
 
-    // encoded
-    List<SnowtamItem> snowtamItems;
+    /**
+     * Decode snowtam
+     * @param coded
+     * @return List of items with picture, name and value
+     */
+    public static List<SnowtamItem> decode(String coded) {
 
-
-    public Snowtam(String coded) {
-        this.coded = coded;
-
-        // decode the string an
-        List<SnowtamItem> snowtamItems = decode(coded);
-        this.snowtamItems = snowtamItems;
+        /**
+         * ([ABCDEFGHJKLMPS])\)\s*([A-Z0-9\/]*)[\s\t]*
+         * ([NRT])\)\s*([A-Z0-9\/\ .,-]*)[\s\t]*
+         */
+        return null;
     }
 
+    /**
+     * Encode snowtam
+     * @param snowtamItems
+     * @return String of encoded snowtam
+     */
 
-    private List<SnowtamItem> decode(String coded) {
+    public static String encode(List<SnowtamItem> snowtamItems) {
 
 
         return null;
     }
 
-    public Snowtam(List<SnowtamItem> snowtamItems) {
-        this.snowtamItems = snowtamItems;
-    }
-
-    public List<SnowtamItem> getSnowtamItems() {
-        return snowtamItems;
-    }
 }

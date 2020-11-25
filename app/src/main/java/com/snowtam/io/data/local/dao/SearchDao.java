@@ -17,6 +17,7 @@ import androidx.room.Update;
 
 import com.snowtam.io.data.local.entity.Airport;
 import com.snowtam.io.data.local.entity.Search;
+import com.snowtam.io.data.local.entity.SearchAirportCrossRef;
 import com.snowtam.io.data.local.entity.SearchWithAirports;
 
 import java.util.Arrays;
@@ -30,23 +31,45 @@ public abstract class SearchDao {
     public static final String TAG = "SearchDao";
 
     /**
-     * Get all recent search
+     * Get all recent search with relation
      * @return
      */
     @Transaction
     @Query("SELECT * FROM search")
     public abstract LiveData<List<SearchWithAirports>> getRecentSearch();
 
+    /**
+     * Get all airports
+     * @return
+     */
     @Transaction
     @Query("SELECT * FROM airports")
     public abstract List<Airport> getAirports();
 
     /**
-     * Insert a search
+     * Get all searches
+     * @return
      */
-    @Insert
     @Transaction
-    abstract void insertSearch(Search ...search);
+    @Query("SELECT * FROM search")
+    public abstract List<Search> getSearches();
+
+    /**
+     * Get all search_airports
+     * @return
+     */
+    @Transaction
+    @Query("SELECT * FROM search_airports")
+    public abstract List<SearchAirportCrossRef> getSearchAirports();
+
+
+    /**
+     * Insert a search
+     * @return Id search
+     */
+    @Transaction
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    abstract long insertSearch(Search search);
 
     /**
      * Update a search
@@ -64,23 +87,38 @@ public abstract class SearchDao {
      * Insert an Airport
      */
     @Transaction
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract void insertAirport(Airport... airport);
+
+    /**
+     * Insert relation between Airport <--> Search
+     * @param searchAirportCrossRefs
+     */
+    @Transaction
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    abstract void insertSearchAirportCrossRef(SearchAirportCrossRef ...searchAirportCrossRefs);
 
     /**
      * Insert airports list of a specific search
      */
+    @Transaction
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void insertAirportsAndSearch(Search search, List<Airport> airports) {
-        airports.forEach(airport ->
-                airport.setFksearchId(search.getSearchId())
-        );
 
+        // insert airports
         Airport[] array = airports.toArray(new Airport[airports.size()]);
+        insertAirport(array);
+
+        // insert search
+        long searchId = insertSearch(search);
+
+        // insert relation between airport and search
+        airports.forEach(airport -> {
+                    SearchAirportCrossRef searchAirportCrossRef = new SearchAirportCrossRef(airport.getAirportCode(), searchId);
+                    insertSearchAirportCrossRef(searchAirportCrossRef);
+        });
 
         Log.d(TAG, Arrays.toString(array));
 
-        insertSearch(search);
-        insertAirport(array);
     }
 }
