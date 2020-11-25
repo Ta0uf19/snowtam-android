@@ -20,8 +20,8 @@ public final class SnowtamDecoder {
     public static List<SnowtamItem> decode(String coded) {
 
         /**
-         * ([ABCDEFGHJKLMPS]\))\s*([A-Z0-9\/]*)[\s\t]*
-         * ([NRT]\))\s*([A-Z0-9\/\ .,-]*)[\s\t]*
+         * ([ABCDEFGHJKLMPS])\)\s*([A-Z0-9\/]*)[\s\t]*
+         * ([NRT])\)\s*([A-Z0-9\/\ .,-]*)[\s\t]*
          */
         return null;
     }

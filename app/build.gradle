@@ -41,6 +41,10 @@ dependencies {
     implementation "androidx.room:room-runtime:2.2.5"
     annotationProcessor "androidx.room:room-compiler:2.2.5"
 
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+
     // LiveData testing
     androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
     androidTestImplementation 'com.jraska.livedata:testing:1.1.2'
