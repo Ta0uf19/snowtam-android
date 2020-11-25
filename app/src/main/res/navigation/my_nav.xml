@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.snowtam.io.ResultFragment"
+        android:name="com.snowtam.io.ui.result.ResultFragment"
         android:label="fragment_result"
         tools:layout="@layout/fragment_result" />
 </navigation>

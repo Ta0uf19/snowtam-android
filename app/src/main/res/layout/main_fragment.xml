@@ -8,7 +8,7 @@
 
 <androidx.constraintlayout.motion.widget.MotionLayout
 
-    android:id="@+id/main"
+    android:id="@+id/mainResultFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/main_fragment_scene"

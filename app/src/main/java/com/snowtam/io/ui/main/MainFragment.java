@@ -2,7 +2,6 @@ package com.snowtam.io.ui.main;
 
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 
@@ -93,7 +92,7 @@ public class MainFragment extends Fragment {
     }
 
     private void initComponent(View view) {
-        motionLayout = (MotionLayout) view.findViewById(R.id.main);
+        motionLayout = (MotionLayout) view.findViewById(R.id.mainResultFragment);
         buttonAddSearch = (Button) view.findViewById(R.id.button_add_et_search);
         buttonSubmit = (Button) view.findViewById(R.id.button_submit);
         recyclerViewSearch = (RecyclerView) view.findViewById(R.id.recyclerView_editText_search);
