@@ -80,7 +80,7 @@ public class DataAdapterSearch extends RecyclerView.Adapter<DataAdapterSearch.my
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
             et_search = itemView.findViewById(R.id.editText_Search);
-            iv_remove = itemView.findViewById(R.id.imageView_remove);
+            iv_remove = itemView.findViewById(R.id.imageView_icon);
         }
 
     }

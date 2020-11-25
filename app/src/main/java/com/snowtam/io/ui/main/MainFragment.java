@@ -93,16 +93,19 @@ public class MainFragment extends Fragment {
 
     private void initComponent(View view) {
         motionLayout = (MotionLayout) view.findViewById(R.id.mainResultFragment);
+
         buttonAddSearch = (Button) view.findViewById(R.id.button_add_et_search);
         buttonSubmit = (Button) view.findViewById(R.id.button_submit);
+
         recyclerViewSearch = (RecyclerView) view.findViewById(R.id.recyclerView_editText_search);
         recyclerViewRecentResearch = (RecyclerView) view.findViewById(R.id.recyclerView_editText_recent_research);
 
         recyclerViewSearch.setHasFixedSize(true);
-        recyclerViewRecentResearch.setHasFixedSize(true);
         LinearLayoutManager layoutManagerSearch = new LinearLayoutManager(getActivity());
-        LinearLayoutManager layoutManagerRecentResearch = new LinearLayoutManager(getActivity());
         recyclerViewSearch.setLayoutManager(layoutManagerSearch);
+
+        recyclerViewRecentResearch.setHasFixedSize(true);
+        LinearLayoutManager layoutManagerRecentResearch = new LinearLayoutManager(getActivity());
         recyclerViewRecentResearch.setLayoutManager(layoutManagerRecentResearch);
     }
 
