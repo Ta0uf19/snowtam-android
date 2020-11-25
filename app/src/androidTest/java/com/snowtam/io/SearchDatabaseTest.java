@@ -1,5 +1,5 @@
 package com.snowtam.io;
-
+import static org.junit.Assert.*;
 import android.content.Context;
 import android.util.Log;
 
@@ -45,31 +45,45 @@ public class SearchDatabaseTest {
     }
 
     @Test
-    public void writeUserAndReadInList() throws Exception {
+    public void writeAndReadRecentSearch() throws Exception {
 
-        Log.d("TEST", "Test running");
+        // create list of airports
         List<Airport> airports = new ArrayList<Airport>();
         airports.add(new Airport("GMMN", "Aéroport de Casablanca Mohammed V", 38.299992, -89.022758));
-
-
-        // Make a search
-        Search search = new Search();
+        airports.add(new Airport("VDM", "Aéroport VDM", 38.299992, -89.022758));
 
         // insert search with airports
-        dao.insertAirportsAndSearch(search, airports);
+        Search search = new Search();
+        dao.insertAirportsAndSearch(new Search(), airports);
 
-        SearchWithAirports searchWithAirports = new SearchWithAirports(search, airports);
+        // mock search with airports and compare it insert db values.
+        SearchWithAirports mockSearchWithAirports = new SearchWithAirports(search, airports);
 
-        Log.d("TEST - Recent search", searchWithAirports.toString());
-
+        // retrive recent search
         LiveData<List<SearchWithAirports>> recentSearch = dao.getRecentSearch();
 
-        TestObserver.test(recentSearch)
-                .awaitValue()
-                .map(s -> s.get(0));
-                //.assertValue(search.getDate());
+        // test mock with actual db value. (https://github.com/jraska/livedata-testing) (waiting for value)
+        TestObserver.test(recentSearch).awaitValue();
+        List<SearchWithAirports> dbRecentSearch = recentSearch.getValue();
 
-        Log.d("TEST - Recent search in db", recentSearch.getValue().toString());
+        // check if we have only one search
+        assertEquals(dbRecentSearch.size(), 1);
+
+        // check if we have two airports in this search
+        assertEquals(dbRecentSearch.get(0).airports.size(), 2);
+
+        // check if airport code of the first airport is the same
+        assertEquals(
+                dbRecentSearch.get(0).airports.get(0).getAirportCode(),
+                mockSearchWithAirports.airports.get(0).getAirportCode()
+        );
+
+
+        Log.d("recentSearch in db ", dbRecentSearch.toString());
+
+//        Log.d("airpots in db", dao.getAirports().toString());
+//        Log.d("searches in db", dao.getSearches().toString());
+//        Log.d("search_airports in db", dao.getSearchAirports().toString());
     }
 
 }

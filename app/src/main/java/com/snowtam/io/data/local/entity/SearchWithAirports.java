@@ -1,6 +1,7 @@
 package com.snowtam.io.data.local.entity;
 
 import androidx.room.Embedded;
+import androidx.room.Junction;
 import androidx.room.Relation;
 
 import java.util.List;
@@ -11,10 +12,13 @@ import java.util.List;
  */
 
 public class SearchWithAirports {
-    @Embedded
-    public Search search;
+    @Embedded public Search search;
 
-    @Relation(parentColumn = "searchId", entityColumn = "fksearchId", entity = Airport.class)
+    @Relation(
+            parentColumn = "searchId",
+            entityColumn = "airportCode",
+            associateBy = @Junction(SearchAirportCrossRef.class)
+    )
     public List<Airport> airports;
 
     public SearchWithAirports(Search search, List<Airport> airports) {
@@ -25,7 +29,7 @@ public class SearchWithAirports {
     @Override
     public String toString() {
         return "SearchWithAirports{" +
-                "search=" + search.getDate() +
+                "search=" + search +
                 ", airports=" + airports +
                 '}';
     }

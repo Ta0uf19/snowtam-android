@@ -3,31 +3,21 @@ package com.snowtam.io.data.local.entity;
 import androidx.annotation.NonNull;
 import androidx.room.Embedded;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "airports"
-//        foreignKeys = @ForeignKey(entity = Search.class,
-//        parentColumns = "searchId",
-//        childColumns = "fksearchId",
-//        onDelete = ForeignKey.CASCADE)
-)
+@Entity(tableName = "airports")
 public class Airport {
 
     @PrimaryKey
     @NonNull
     private String airportCode;
-
     private String name;
     private double lat;
     private double log;
-    private long fksearchId;
+    // coded snowtam
+    private String snowtam;
 
-    // another specific info to add here (item C,..) (as embedded objects)
-    @Embedded
-    private Snowtam snowtam;
-
-    public Airport(String airportCode, String name, double lat, double log) {
+    public Airport(@NonNull String airportCode, String name, double lat, double log) {
         this.airportCode = airportCode;
         this.name = name;
         this.lat = lat;
@@ -38,7 +28,7 @@ public class Airport {
         return airportCode;
     }
 
-    public Snowtam getSnowtam() {
+    public String getSnowtam() {
         return snowtam;
     }
 
@@ -54,16 +44,8 @@ public class Airport {
         return log;
     }
 
-    public void setSnowtam(Snowtam snowtam) {
+    public void setSnowtam(String snowtam) {
         this.snowtam = snowtam;
-    }
-
-    public long getFksearchId() {
-        return fksearchId;
-    }
-
-    public void setFksearchId(long fksearchId) {
-        this.fksearchId = fksearchId;
     }
 
     @Override
@@ -73,7 +55,6 @@ public class Airport {
                 ", name='" + name + '\'' +
                 ", lat=" + lat +
                 ", log=" + log +
-                ", fksearchId=" + fksearchId +
                 ", snowtam=" + snowtam +
                 '}';
     }
