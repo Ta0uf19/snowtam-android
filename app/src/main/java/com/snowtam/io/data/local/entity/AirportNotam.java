@@ -2,7 +2,14 @@ package com.snowtam.io.data.local.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.snowtam.io.data.local.entity.decoder.SnowtamItem;
+import com.snowtam.io.utils.SnowtamDecoder;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Entity(tableName = "airports")
 public class AirportNotam {
@@ -14,7 +21,10 @@ public class AirportNotam {
     private Double lat;
     private Double log;
     private String countryCode;
-    private String snowtam; // formattedText snowtam
+    private String rawSnowtam; // formattedText snowtam
+    
+    @Ignore
+    private List<SnowtamItem> decodedSnowtam;
 
     public AirportNotam(@NonNull String airportCode, String countryCode, String name, Double lat, Double log) {
         this.airportCode = airportCode;
@@ -24,6 +34,14 @@ public class AirportNotam {
         this.countryCode = countryCode;
     }
     public AirportNotam() { }
+
+    public List<SnowtamItem> getDecodedSnowtam() {
+        return decodedSnowtam;
+    }
+
+    public void setDecodedSnowtam(List<SnowtamItem> decodedSnowtam) {
+        this.decodedSnowtam = decodedSnowtam;
+    }
 
     public void setAirportCode(@NonNull String airportCode) {
         this.airportCode = airportCode;
@@ -49,10 +67,6 @@ public class AirportNotam {
         return airportCode;
     }
 
-    public String getSnowtam() {
-        return snowtam;
-    }
-
     public String getName() {
         return name;
     }
@@ -65,8 +79,15 @@ public class AirportNotam {
         return log;
     }
 
-    public void setSnowtam(String snowtam) {
-        this.snowtam = snowtam;
+
+    public String getRawSnowtam() {
+        return rawSnowtam;
+    }
+    public void setRawSnowtam(String snowtam) {
+        this.rawSnowtam = snowtam;
+
+        // decode snowtam
+        this.decodedSnowtam = SnowtamDecoder.decode(snowtam);
     }
 
     public String getCountryCode() {
@@ -81,7 +102,8 @@ public class AirportNotam {
                 ", lat=" + lat +
                 ", log=" + log +
                 ", countryCode='" + countryCode + '\'' +
-                ", snowtam='" + snowtam + '\'' +
+                ", rawSnowtam ='" + rawSnowtam + '\'' +
+                ", decodedSnowtam=" + Arrays.toString(decodedSnowtam.toArray()) +
                 '}';
     }
 }
