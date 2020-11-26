@@ -25,7 +25,7 @@ public class NotamResponse {
             if(feature.properties.publisherNOF.compareTo("SNOWTAM") == 0) {
                 // clean string
                 String clean = SnowtamDecoder.clean(feature.properties.translations.get(0).formattedText);
-                notam.setSnowtam(clean);
+                notam.setRawSnowtam(clean);
                 notam.setCountryCode(feature.properties.countryCode);
                 notam.setAirportCode(feature.properties.location);
             };
@@ -35,7 +35,7 @@ public class NotamResponse {
                 notam.setLog(feature.properties.lon);
             }
         }
-        return notam.getSnowtam() != null ? notam : null;
+        return notam.getRawSnowtam() != null ? notam : null;
     }
 
     class Feature {

@@ -8,12 +8,10 @@ import com.snowtam.io.data.local.entity.AirportNotam;
 import com.snowtam.io.data.local.entity.decoder.SnowtamItem;
 import com.snowtam.io.data.remote.NotamResponse;
 import com.snowtam.io.data.remote.ServiceNotam;
-import com.snowtam.io.utils.SnowtamDecoder;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
@@ -43,15 +41,15 @@ public class ApiNotamTest {
                 if(response.isSuccessful()) {
                     NotamResponse notamResponse = response.body();
 
-                    //Log.d(TAG, notamResponse.toString());
+
                     AirportNotam firstSnowtam = notamResponse.getFirstSnowtam();
+
+                    // get encoded snowtam
+                    String format = firstSnowtam.getRawSnowtam();
+                    // get decoded snowtam
+                    List<SnowtamItem> decoded = firstSnowtam.getDecodedSnowtam();
+
                     Log.d(TAG, firstSnowtam.toString());
-
-
-                    // Snowtam decoder test
-                    List<SnowtamItem> list = SnowtamDecoder.decode(firstSnowtam.getSnowtam());
-                    Log.d(TAG, Arrays.toString(list.toArray()));
-
                 }
                 Log.d(TAG, response.toString());
                 latch.countDown();

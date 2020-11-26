@@ -124,7 +124,7 @@ public final class SnowtamDecoder {
         switch (snowtamItem.getAttr()) {
             case "A":
 
-                snowtamItem.setName_attr("Aérodrome");
+                snowtamItem.setName("Aérodrome");
                 snowtamItem.setValue(value);
                 break;
 
@@ -139,11 +139,11 @@ public final class SnowtamDecoder {
                 }
                 date.setYear(new Date().getYear());
                 snowtamItem.setValue(date.toString());
-                snowtamItem.setName_attr("Date observation");
+                snowtamItem.setName("Date observation");
 
                 break;
             case "C":
-                snowtamItem.setName_attr("Piste");
+                snowtamItem.setName("Piste");
                 snowtamItem.setValue("Runway "  + value);
                 break;
             case "D":
@@ -158,7 +158,7 @@ public final class SnowtamDecoder {
             case "E":
                 // E LARGEUR DÉBLAYÉE SI INFÉRIEURE A LA LARGEUR DE PISTE PUBLIÉE (en m, si décalée à gauche ou à droite par rapport à l'axe, ajouter "L" ou "R" après les chiffres)
                 snowtamItem.setValue("CLEARED RUNWAY WIDTH " + value);
-                snowtamItem.setName_attr("Cleared runway length");
+                snowtamItem.setName("Cleared runway length");
 
                 break;
 
@@ -179,7 +179,7 @@ public final class SnowtamDecoder {
                 }
 
                 snowtamItem.setValue(builder.toString());
-                snowtamItem.setName_attr("Condition de la piste");
+                snowtamItem.setName("Condition de la piste");
 
                 break;
             case "G":
@@ -203,7 +203,7 @@ public final class SnowtamDecoder {
                     builder.append(" / ");
                 }
                 snowtamItem.setValue(builder.toString());
-                snowtamItem.setName_attr("ÉPAISSEUR MOYENNE (mm)");
+                snowtamItem.setName("ÉPAISSEUR MOYENNE (mm)");
 
                 break;
             case "H":
@@ -240,7 +240,7 @@ public final class SnowtamDecoder {
                 }
 
                 snowtamItem.setValue(builder.toString());
-                snowtamItem.setName_attr("Coeff frottement");
+                snowtamItem.setName("Coeff frottement");
 
                 break;
             case "J":
