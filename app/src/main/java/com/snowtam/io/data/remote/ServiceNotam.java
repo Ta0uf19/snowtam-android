@@ -21,15 +21,13 @@ public class ServiceNotam {
     public static final String KEY = "408f34c87ee127260f6ef2566399efe6";
     private static final String BASE_URL = "https://api.laminardata.aero/";
 
-    //private static final String BASE_URL = "https://api.laminardata.aero/v2/aerodromes/ENBO/notams?user_key="+KEY;
-
-
     public ServiceNotam() {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
 
         // interceptor auth
+        // adding query paramter ?user_key
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(
                 new Interceptor() {
                     @Override
