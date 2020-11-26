@@ -8,7 +8,7 @@
 
 <androidx.constraintlayout.motion.widget.MotionLayout
 
-    android:id="@+id/main"
+    android:id="@+id/mainResultFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/main_fragment_scene"
@@ -198,7 +198,7 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_RecentResearch"></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/textView_RecentResearch" />
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
