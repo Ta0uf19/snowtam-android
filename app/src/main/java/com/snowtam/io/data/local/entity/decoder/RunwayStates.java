@@ -1,4 +1,4 @@
-package com.snowtam.io.utils.snowtam;
+package com.snowtam.io.data.local.entity.decoder;
 
 /**
  * Author : Taoufik Tribki

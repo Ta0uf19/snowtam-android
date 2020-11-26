@@ -1,4 +1,4 @@
-package com.snowtam.io.data.local.entity;
+package com.snowtam.io.data.local.entity.decoder;
 
 import com.snowtam.io.utils.SnowtamDecoder;
 
