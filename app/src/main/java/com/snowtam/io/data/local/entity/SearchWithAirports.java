@@ -19,9 +19,9 @@ public class SearchWithAirports {
             entityColumn = "airportCode",
             associateBy = @Junction(SearchAirportCrossRef.class)
     )
-    public List<Airport> airports;
+    public List<AirportNotam> airports;
 
-    public SearchWithAirports(Search search, List<Airport> airports) {
+    public SearchWithAirports(Search search, List<AirportNotam> airports) {
         this.search = search;
         this.airports = airports;
     }

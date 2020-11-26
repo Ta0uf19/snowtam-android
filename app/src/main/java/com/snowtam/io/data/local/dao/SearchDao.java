@@ -15,7 +15,7 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
 
-import com.snowtam.io.data.local.entity.Airport;
+import com.snowtam.io.data.local.entity.AirportNotam;
 import com.snowtam.io.data.local.entity.Search;
 import com.snowtam.io.data.local.entity.SearchAirportCrossRef;
 import com.snowtam.io.data.local.entity.SearchWithAirports;
@@ -44,7 +44,7 @@ public abstract class SearchDao {
      */
     @Transaction
     @Query("SELECT * FROM airports")
-    public abstract List<Airport> getAirports();
+    public abstract List<AirportNotam> getAirports();
 
     /**
      * Get all searches
@@ -88,7 +88,7 @@ public abstract class SearchDao {
      */
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract void insertAirport(Airport... airport);
+    abstract void insertAirport(AirportNotam... airport);
 
     /**
      * Insert relation between Airport <--> Search
@@ -103,10 +103,10 @@ public abstract class SearchDao {
      */
     @Transaction
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void insertAirportsAndSearch(Search search, List<Airport> airports) {
+    public void insertAirportsAndSearch(Search search, List<AirportNotam> airports) {
 
         // insert airports
-        Airport[] array = airports.toArray(new Airport[airports.size()]);
+        AirportNotam[] array = airports.toArray(new AirportNotam[airports.size()]);
         insertAirport(array);
 
         // insert search
