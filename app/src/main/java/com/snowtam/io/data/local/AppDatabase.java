@@ -8,13 +8,14 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.snowtam.io.data.local.dao.SearchDao;
-import com.snowtam.io.data.local.entity.Airport;
+import com.snowtam.io.data.local.entity.AirportNotam;
 import com.snowtam.io.data.local.entity.Search;
+import com.snowtam.io.data.local.entity.SearchAirportCrossRef;
 import com.snowtam.io.utils.TimestampConverters;
 
 // At runtime, you can acquire an instance of Database by calling Room.databaseBuilder() or Room.inMemoryDatabaseBuilder().
 
-@Database(entities = {Search.class, Airport.class}, version = 1, exportSchema = false)
+@Database(entities = {Search.class, AirportNotam.class, SearchAirportCrossRef.class}, version = 1, exportSchema = false)
 @TypeConverters({TimestampConverters.class}) // to convert Date object to unix timestamp
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;

@@ -9,9 +9,8 @@ import java.util.Date;
 public class Search {
 
     @PrimaryKey(autoGenerate = true)
-    private long searchId;
-
-    private Date date;
+    public long searchId;
+    public Date date;
 
     public Search() {
         this.date = new Date();
@@ -20,16 +19,15 @@ public class Search {
     public Date getDate() {
         return date;
     }
-
     public long getSearchId() {
         return searchId;
     }
 
-    public void setSearchId(long searchId) {
-        this.searchId = searchId;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
+    @Override
+    public String toString() {
+        return "Search{" +
+                "searchId=" + searchId +
+                ", date=" + date +
+                '}';
     }
 }
