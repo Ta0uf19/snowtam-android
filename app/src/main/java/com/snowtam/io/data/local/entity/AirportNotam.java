@@ -26,12 +26,13 @@ public class AirportNotam {
     @Ignore
     private List<SnowtamItem> decodedSnowtam;
 
-    public AirportNotam(@NonNull String airportCode, String countryCode, String name, Double lat, Double log) {
+    public AirportNotam(@NonNull String airportCode, String countryCode, String name, Double lat, Double log,String rawSnowtam) {
         this.airportCode = airportCode;
         this.name = name;
         this.lat = lat;
         this.log = log;
         this.countryCode = countryCode;
+        setRawSnowtam(rawSnowtam);
     }
     public AirportNotam() { }
 

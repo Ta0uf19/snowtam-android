@@ -49,8 +49,8 @@ public class SearchDatabaseTest {
 
         // create list of airports
         List<AirportNotam> airports = new ArrayList<AirportNotam>();
-        airports.add(new AirportNotam("GMMN", "MA", "Aéroport de Casablanca Mohammed V", 38.299992, -89.022758));
-        airports.add(new AirportNotam("VDM","MA", "Aéroport VDM", 38.299992, -89.022758));
+        airports.add(new AirportNotam("GMMN", "MA", "Aéroport de Casablanca Mohammed V", 38.299992, -89.022758,""));
+        airports.add(new AirportNotam("VDM","MA", "Aéroport VDM", 38.299992, -89.022758,""));
 
         // insert search with airports
         Search search = new Search();

@@ -7,13 +7,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,15 +22,17 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.snowtam.io.R;
-import com.snowtam.io.data.local.entity.Snowtam;
-import com.snowtam.io.ui.main.adapter.DataAdapterSearch;
+import com.snowtam.io.data.local.entity.AirportNotam;
+import com.snowtam.io.data.local.entity.decoder.SnowtamItem;
 import com.snowtam.io.ui.result.adapter.DataAdapterSnowTamParameter;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 
 public class ResultScreenTemplate extends Fragment implements OnMapReadyCallback {
-    private Snowtam snowtam;
+    private AirportNotam airportNotam;
     private SwitchCompat switchRaw;
     private ConstraintLayout layoutRaw;
     private ConstraintLayout layoutPretty;
@@ -38,10 +40,13 @@ public class ResultScreenTemplate extends Fragment implements OnMapReadyCallback
     private DataAdapterSnowTamParameter dataAdapterSnowTamParameter;
     private FragmentContainerView fragmentMap;
     private GoogleMap mMap;
+    private TextView tvTitle;
+    private TextView tvRawSnowTam;
 
 
-    public ResultScreenTemplate(Snowtam snowtam) {
-        this.snowtam = snowtam;
+
+    public ResultScreenTemplate(AirportNotam airportNotam) {
+        this.airportNotam = airportNotam;
     }
 
     @Override
@@ -56,6 +61,11 @@ public class ResultScreenTemplate extends Fragment implements OnMapReadyCallback
         layoutRaw = (ConstraintLayout) view.findViewById(R.id.constraintLayout_raw);
         layoutPretty = (ConstraintLayout) view.findViewById(R.id.constraintLayout_pretty);
 
+        tvTitle = view.findViewById(R.id.textView_airport_name);
+        tvRawSnowTam = view.findViewById(R.id.textView_raw_snowtam);
+
+        tvTitle.setText(airportNotam.getName());
+        tvRawSnowTam.setText(airportNotam.getRawSnowtam());
 
         fragmentMap = (FragmentContainerView) view.findViewById(R.id.map);
 
@@ -68,27 +78,9 @@ public class ResultScreenTemplate extends Fragment implements OnMapReadyCallback
         recyclerViewSnowTamParam.setHasFixedSize(true);
         recyclerViewSnowTamParam.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
-        ArrayList<Object> snowTamParams = new ArrayList<>();
-        snowTamParams.add(null);
-        snowTamParams.add(null);
-        snowTamParams.add(null);
-        snowTamParams.add(null);
-        snowTamParams.add(null);
-        snowTamParams.add(null);
-        snowTamParams.add(null);
-        snowTamParams.add(null);
-        snowTamParams.add(null);
-        snowTamParams.add(null);
-        snowTamParams.add(null);
-        snowTamParams.add(null);
-        snowTamParams.add(null);
-        snowTamParams.add(null);
-        snowTamParams.add(null);
-        snowTamParams.add(null);
-        snowTamParams.add(null);
 
 
-        dataAdapterSnowTamParameter = new DataAdapterSnowTamParameter(getActivity(), snowTamParams);
+        dataAdapterSnowTamParameter = new DataAdapterSnowTamParameter(getActivity(),airportNotam.getDecodedSnowtam() );
         recyclerViewSnowTamParam.setAdapter(dataAdapterSnowTamParameter);
 
 
@@ -126,10 +118,10 @@ public class ResultScreenTemplate extends Fragment implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        LatLng position = new LatLng(airportNotam.getLat(), airportNotam.getLog());
         mMap.addMarker(new MarkerOptions()
-                .position(sydney)
-                .title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                .position(position)
+                .title(airportNotam.getName()));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
     }
 }

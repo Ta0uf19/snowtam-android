@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.snowtam.io.R;
-import com.snowtam.io.data.local.entity.Snowtam;
+import com.snowtam.io.data.local.entity.decoder.SnowtamItem;
 
 import java.util.List;
 
@@ -22,9 +22,9 @@ public class DataAdapterSnowTamParameter extends RecyclerView.Adapter<DataAdapte
     private static final String TAG = "DataAdapterSnowTamParameter";
 
     Context mContext;
-    public List<Object> mData; // todo change object with snowtamParams
+    public List<SnowtamItem> mData; // todo change object with snowtamParams
 
-    public DataAdapterSnowTamParameter(Context mContext, List<Object> mData) {
+    public DataAdapterSnowTamParameter(Context mContext, List<SnowtamItem> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -44,10 +44,10 @@ public class DataAdapterSnowTamParameter extends RecyclerView.Adapter<DataAdapte
     @Override
     public void onBindViewHolder(@NonNull final myViewHolder myViewHolder, final int i) {
         //TODO change the hard coded text
-        final Object snowtamParams = mData.get(i);
-        myViewHolder.tv_key.setText("Date"); //snowTam.key
-        myViewHolder.tv_value.setText("December 20.2020"); //snowTam.value
-        myViewHolder.iv_icon.setImageResource(R.drawable.ic_calendar); //snowTam.icon
+        final SnowtamItem snowtamItem = mData.get(i);
+        myViewHolder.tv_key.setText(snowtamItem.getName());
+        myViewHolder.tv_value.setText(snowtamItem.getValue());
+        myViewHolder.iv_icon.setImageResource(R.drawable.ic_calendar); // TODO change it to dynamic
 
     }
 

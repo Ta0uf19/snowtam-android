@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.snowtam.io.R;
-import com.snowtam.io.data.local.entity.Snowtam;
+import com.snowtam.io.data.local.entity.AirportNotam;
 import com.snowtam.io.ui.result.adapter.ViewPagerAdapter;
 import com.snowtam.io.ui.result.screen.ResultScreenTemplate;
 
@@ -31,10 +31,25 @@ public class ResultFragment extends Fragment {
 
         //Expected value form ViewModel : List of SnowTam object
         //SnowTam object contains SnowTam text, coordinates of the airport and list of SnowTam attribute
-        ArrayList<Snowtam> snowtams = new ArrayList<>();
-        snowtams.add(new Snowtam());
-        snowtams.add(new Snowtam());
-        snowtams.add(new Snowtam());
+
+        String rawSnowtam = "SWUU1982 UUEE 11251820\n" +
+                "(SNOWTAM 1982\n" +
+                "   A)UUEE B)11251820\n" +
+                "    C)06L F)2/2/2 H)5/5/5 N)2\n" +
+                "    C)06R F)2/2/2 H)5/5/5 N)2\n" +
+                "    R)2 S)11260800)";
+
+        AirportNotam airportNotam= new AirportNotam("GMMN",
+                "MA",
+                "Aéroport de Casablanca Mohammed V",
+                38.299992,
+                -89.022758,
+                rawSnowtam);
+
+        ArrayList<AirportNotam> airportNotams = new ArrayList<>();
+        airportNotams.add(airportNotam);
+        airportNotams.add(airportNotam);
+        airportNotams.add(airportNotam);
 
 
         ArrayList<Fragment> fragmentList = new ArrayList<>();
@@ -42,9 +57,9 @@ public class ResultFragment extends Fragment {
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.linearLayout_indicators);
 
         //Create n Fragment(ResultScreenTemplate) and insert snowtam to display
-        for (Snowtam snowtam:
-                snowtams) {
-            fragmentList.add(new ResultScreenTemplate(snowtam));
+        for (AirportNotam raw:
+                airportNotams) {
+            fragmentList.add(new ResultScreenTemplate(raw));
             ImageView indicator = createIndicator();
             indicators.add(indicator);
             linearLayout.addView(indicator);

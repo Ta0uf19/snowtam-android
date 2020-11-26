@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:text="London"
         android:textColor="@color/TextColorDark"
         android:textSize="24sp"
@@ -60,7 +60,7 @@
 
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textView_raw_snowtam"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/shape_cv_recent_research"
