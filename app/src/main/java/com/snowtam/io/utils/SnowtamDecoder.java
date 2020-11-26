@@ -1,8 +1,13 @@
 package com.snowtam.io.utils;
 
-import com.snowtam.io.data.local.entity.SnowtamItem;
+import com.snowtam.io.data.local.entity.decoder.Friction;
+import com.snowtam.io.data.local.entity.decoder.SnowtamItem;
+import com.snowtam.io.data.local.entity.decoder.RunwayStates;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -110,31 +115,137 @@ public final class SnowtamDecoder {
     private SnowtamItem processingSnowtam(String attr, String value) {
 
         String picture = ("attr_" + attr + ".png").toLowerCase();
+        // create object
         SnowtamItem snowtamItem = new SnowtamItem(attr, value, picture);
+
+        String[] split = null;
+        StringBuilder builder = null;
 
         switch (snowtamItem.getAttr()) {
             case "A":
+
                 snowtamItem.setName_attr("Aérodrome");
                 snowtamItem.setValue(value);
                 break;
+
             case "B":
+                // Date formating
+                SimpleDateFormat sdf = new SimpleDateFormat("MMddhhmm");
+                Date date = null;
+                try {
+                    date = sdf.parse(value);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                date.setYear(new Date().getYear());
+                snowtamItem.setValue(date.toString());
+                snowtamItem.setName_attr("Date observation");
+
                 break;
             case "C":
                 snowtamItem.setName_attr("Piste");
                 snowtamItem.setValue("Runway "  + value);
                 break;
             case "D":
+                /*
+                 * D) 930 => CLEARED RUNWAY LENGTH 930M
+                 * * E LARGEUR DÉBLAYÉE SI INFÉRIEURE A LA LARGEUR DE PISTE PUBLIÉE (en m, si
+                 * décalée à gauche ou à droite par rapport à l'axe, ajouter "L" ou "R" après les chiffres)
+                 * => “Cleared runway width”
+                 */
+
                 break;
             case "E":
+                // E LARGEUR DÉBLAYÉE SI INFÉRIEURE A LA LARGEUR DE PISTE PUBLIÉE (en m, si décalée à gauche ou à droite par rapport à l'axe, ajouter "L" ou "R" après les chiffres)
+                snowtamItem.setValue("CLEARED RUNWAY WIDTH " + value);
+                snowtamItem.setName_attr("Cleared runway length");
+
                 break;
+
             case "F":
-                snowtamItem.setName_attr("Runway Contamination");
+                // F CONDITIONS SUR TOUTE LA LONGUEUR DE LA PISTE
+                // * F) 1/1/7 => Threshold: DAMP / Mid runway: DAMP / Roll out: ICE
+
+                split = value.split("/");
+                builder = new StringBuilder();
+
+                for(int i = 0; i < split.length; i++) {
+                    if(i == 0)builder.append("Threshold: ");
+                    if(i == 1)builder.append("Mid runway: ");
+                    if(i == 2)builder.append("Roll out: ");
+                    // append state of runway
+                    builder.append(RunwayStates.getState(Integer.parseInt(split[i])));
+                    builder.append(" / ");
+                }
+
+                snowtamItem.setValue(builder.toString());
+                snowtamItem.setName_attr("Condition de la piste");
+
                 break;
             case "G":
+                //  G ÉPAISSEUR MOYENNE (en mm) SUR CHAQUE TIERS DE LA LONGUEUR TOTALE DE LA PISTE (note XX si non mesurable or non significatif. La precision doit etre de 20mm pour la
+                //neige seche, 10mm pour la neige humide et 3mm pour le slush)
+                split = value.split("/");
+                builder = new StringBuilder();
+                //builder.append("MEAN DEPTH ");
+                for(int i = 0; i < split.length; i++) {
+                    if (i == 0) builder.append("Threshold: ");
+                    if (i == 1) builder.append("Mid runway: ");
+                    if (i == 2) builder.append("Roll out: ");
+
+                    if(split[i].compareTo("XX") != 0) {
+                        builder.append(Integer.parseInt(split[i]));
+                        builder.append("mm");
+                    }
+                    else {
+                        builder.append("Non mésuré");
+                    }
+                    builder.append(" / ");
+                }
+                snowtamItem.setValue(builder.toString());
+                snowtamItem.setName_attr("ÉPAISSEUR MOYENNE (mm)");
+
                 break;
             case "H":
+                // H COEFFICIENT DE FROTTEMENT MESURÉ OU ESTIMÉ POUR CHAQUE TIERS DE LA PISTE
+                // 37/31/41 GRT     -> BRAKING ACTION Threshold: MEDIUM TO GOOD / Mid runway: MEDIUM / Roll Out: GOOD / Instrument: Grip tester
+                split = value.split("/");
+                builder = new StringBuilder();
+                //builder.append("BRAKING ACTION ");
+                for(int i = 0; i < split.length; i++) {
+                    if(i == 0)builder.append("Threshold: ");
+                    if(i == 1)builder.append("Mid runway: ");
+                    if(i == 2)builder.append("Roll out: ");
+                    // append state of runway
+                    int score = Integer.parseInt(split[i]);
+                    int pscore = 0;    // between 1 and 5
+                    if(score > 40) {
+                        pscore = 5;
+                    }
+                    else if(score>= 36 && score <= 39) {
+                        pscore = 4;
+                    }
+                    else if(score>= 30 && score <= 35) {
+                        pscore = 3;
+                    }
+                    else if(score >= 26 && score <= 29) {
+                        pscore = 2;
+                    }
+                    else if(score <= 25) {
+                        pscore = 1;
+                    }
+
+                    builder.append(Friction.get(pscore));
+                    builder.append(" / ");
+                }
+
+                snowtamItem.setValue(builder.toString());
+                snowtamItem.setName_attr("Coeff frottement");
+
                 break;
             case "J":
+                // * J CONGÈRES CRITIQUES : Hauteur (cm). Distance (m) du bord de la piste suivis de "L", "R"
+                //ou "LR", s'il y a lieu (« Critical snowbanks »)
                 break;
         }
 

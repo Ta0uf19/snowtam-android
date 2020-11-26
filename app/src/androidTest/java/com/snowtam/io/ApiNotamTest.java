@@ -5,7 +5,7 @@ import android.util.Log;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.snowtam.io.data.local.entity.AirportNotam;
-import com.snowtam.io.data.local.entity.SnowtamItem;
+import com.snowtam.io.data.local.entity.decoder.SnowtamItem;
 import com.snowtam.io.data.remote.NotamResponse;
 import com.snowtam.io.data.remote.ServiceNotam;
 import com.snowtam.io.utils.SnowtamDecoder;
@@ -33,7 +33,9 @@ public class ApiNotamTest {
 
         ServiceNotam serviceNotam = new ServiceNotam();
 
-        serviceNotam.getNotam("UUEE")
+        // ENGM - Norway
+        //
+        serviceNotam.getNotam("ENGM")
                 .enqueue(new Callback<NotamResponse>() {
             @Override
             public void onResponse(Call<NotamResponse> call, Response<NotamResponse> response) {
