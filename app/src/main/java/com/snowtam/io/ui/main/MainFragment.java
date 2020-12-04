@@ -84,6 +84,7 @@ public class MainFragment extends Fragment {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_resultFragment);
             }
         });

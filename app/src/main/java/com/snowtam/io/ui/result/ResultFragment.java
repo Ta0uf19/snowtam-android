@@ -17,6 +17,7 @@ import com.snowtam.io.ui.result.adapter.ViewPagerAdapter;
 import com.snowtam.io.ui.result.screen.ResultScreenTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ResultFragment extends Fragment {
@@ -46,7 +47,7 @@ public class ResultFragment extends Fragment {
                 -89.022758,
                 rawSnowtam);
 
-        ArrayList<AirportNotam> airportNotams = new ArrayList<>();
+        List<AirportNotam> airportNotams = new ArrayList<>();
         airportNotams.add(airportNotam);
         airportNotams.add(airportNotam);
         airportNotams.add(airportNotam);
