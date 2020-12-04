@@ -29,7 +29,7 @@ public class ApiNotamTest {
         ServiceNotam serviceNotam = new ServiceNotam();
 
         // ENGM - Norway
-        serviceNotam.getNotam("ENGM")
+        serviceNotam.getNotam("UUEE")
                 .enqueue(new Callback<NotamResponse>() {
             @Override
             public void onResponse(Call<NotamResponse> call, Response<NotamResponse> response) {

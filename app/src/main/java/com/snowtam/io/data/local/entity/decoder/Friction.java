@@ -11,7 +11,10 @@ public enum Friction {
     private static Friction[] list = Friction.values();
 
     public static Friction get(int i) {
-        return list[i];
+        if(i>= 0 && i <= 5) return list[i];
+        else {
+            return DUMMY;
+        }
     }
     public static int listGetLastIndex() {
         return list.length - 1;

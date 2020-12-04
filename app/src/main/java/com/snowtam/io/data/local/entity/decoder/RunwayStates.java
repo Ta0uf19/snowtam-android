@@ -32,12 +32,16 @@ public enum  RunwayStates {
     SLUSH,
     ICE,
     COMPACTED,
-    FROZENRUTS;
+    FROZENRUTS,
+    UNKNOWN; // cas particulier
 
     private static RunwayStates[] list = RunwayStates.values();
 
     public static RunwayStates getState(int i) {
-        return list[i];
+        if(i>= 0 && i <= 9) return list[i];
+        else {
+          return UNKNOWN;
+        }
     }
     public static int listGetLastIndex() {
         return list.length - 1;
