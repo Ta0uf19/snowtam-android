@@ -40,15 +40,13 @@ public class ResultFragment extends Fragment {
                 "    R)2 S)11260800)";
 
         AirportNotam airportNotam= new AirportNotam("GMMN",
-                "MA",
-                "Aéroport de Casablanca Mohammed V",
-                38.299992,
-                -89.022758,
+                "RU",
+                "Moscow/Sherem",
+                55.9736482,
+                37.4103143,
                 rawSnowtam);
 
         ArrayList<AirportNotam> airportNotams = new ArrayList<>();
-        airportNotams.add(airportNotam);
-        airportNotams.add(airportNotam);
         airportNotams.add(airportNotam);
 
 
