@@ -1,6 +1,8 @@
 package com.snowtam.io.ui.main.adapter;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +46,24 @@ public class DataAdapterSearch extends RecyclerView.Adapter<DataAdapterSearch.my
 
         final String et_search = mData.get(i);
         myViewHolder.et_search.setText(et_search);
+        myViewHolder.et_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mData.set(i, myViewHolder.et_search.getText().toString());
+
+            }
+        });
+
+
 
         if(i == 0 ){
             myViewHolder.iv_remove.setVisibility(View.INVISIBLE);

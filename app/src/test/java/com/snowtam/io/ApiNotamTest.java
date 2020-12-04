@@ -2,8 +2,6 @@ package com.snowtam.io;
 
 import android.util.Log;
 
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-
 import com.snowtam.io.data.local.entity.AirportNotam;
 import com.snowtam.io.data.local.entity.decoder.SnowtamItem;
 import com.snowtam.io.data.remote.NotamResponse;
@@ -19,7 +17,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-@RunWith(AndroidJUnit4.class)
 public class ApiNotamTest {
 
     public static final String TAG = "ApiNotamTest";
@@ -32,12 +29,11 @@ public class ApiNotamTest {
         ServiceNotam serviceNotam = new ServiceNotam();
 
         // ENGM - Norway
-        //
-        serviceNotam.getNotam("ENGM")
+        serviceNotam.getNotam("UUEE")
                 .enqueue(new Callback<NotamResponse>() {
             @Override
             public void onResponse(Call<NotamResponse> call, Response<NotamResponse> response) {
-                Log.d(TAG, response.toString());
+                System.out.println(response.toString());
                 if(response.isSuccessful()) {
                     NotamResponse notamResponse = response.body();
 
@@ -49,15 +45,15 @@ public class ApiNotamTest {
                     // get decoded snowtam
                     List<SnowtamItem> decoded = firstSnowtam.getDecodedSnowtam();
 
-                    Log.d(TAG, firstSnowtam.toString());
+                    System.out.println(firstSnowtam.toString());
                 }
-                Log.d(TAG, response.toString());
+                System.out.println(response.toString());
                 latch.countDown();
             }
 
             @Override
             public void onFailure(Call<NotamResponse> call, Throwable t) {
-                Log.d(TAG, call.toString());
+                System.out.println(call.toString());
                 latch.countDown();
             }
         });
