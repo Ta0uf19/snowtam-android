@@ -9,14 +9,18 @@
 
     <TextView
         android:id="@+id/textView_airport_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="5dp"
         android:text="London"
+        android:maxLines="1"
         android:textColor="@color/TextColorDark"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/switch_raw"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,7 +41,7 @@
         android:id="@+id/switch_raw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="32dp"
         android:text="Raw"
         android:textColor="@color/TextColorDark"
@@ -98,7 +102,7 @@
     <ImageView
         android:id="@+id/imageView_swipe"
         android:layout_width="0dp"
-        android:layout_height="10dp"
+        android:layout_height="15dp"
         android:background="@drawable/shape_iv_swipe_up"
         app:layout_constraintBottom_toTopOf="@id/map"
         app:layout_constraintEnd_toEndOf="parent"
