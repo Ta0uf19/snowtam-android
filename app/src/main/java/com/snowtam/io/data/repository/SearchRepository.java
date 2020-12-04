@@ -39,11 +39,18 @@ public class SearchRepository {
         this.searchDao = appDatabase.searchDao();
     }
 
+    /**
+     * Multiple async - shitty code use RXjava instead
+     * @param codesAirports
+     * @return
+     */
     public LiveData<List<AirportNotam>> search(List<String> codesAirports) {
         Log.d("SearchRepository>>",codesAirports.toString());
 
         MutableLiveData<List<AirportNotam>> data = new MutableLiveData<List<AirportNotam>>();
         List<AirportNotam> listAirportNotam = new ArrayList<>();
+        final int[] inc = {0};
+        final int elem = codesAirports.size();
 
         for(String airportCode : codesAirports) {
 
@@ -56,19 +63,19 @@ public class SearchRepository {
 
                                 AirportNotam snowtam = notamResponse.getFirstSnowtam();
                                 listAirportNotam.add(snowtam);
-                                Log.d("SearchRepository","reponse : "+snowtam.toString());
+                                inc[0]++;
 
+                                if(inc[0] == elem) {
+                                    data.setValue(listAirportNotam);
+                                }
                             }
                         }
-
                         @Override
                         public void onFailure(Call<NotamResponse> call, Throwable t) {
                             System.out.println(call.toString());
                         }
                     });
         }
-
-        data.setValue(listAirportNotam);
 
         return data;
     }

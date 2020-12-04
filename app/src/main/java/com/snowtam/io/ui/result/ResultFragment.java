@@ -69,7 +69,7 @@ public class ResultFragment extends Fragment {
 
         List<String> fromSearch = new ArrayList<>();
         fromSearch.add("ENGM");
-        fromSearch.add("ENGM");
+        fromSearch.add("UUEE");
 
         //resultViewModel.searchListAirportNotam(fromSearch);
 
