@@ -1,6 +1,7 @@
 package com.snowtam.io.data.repository;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -39,6 +40,7 @@ public class SearchRepository {
     }
 
     public LiveData<List<AirportNotam>> search(List<String> codesAirports) {
+        Log.d("SearchRepository>>",codesAirports.toString());
 
         MutableLiveData<List<AirportNotam>> data = new MutableLiveData<List<AirportNotam>>();
         List<AirportNotam> listAirportNotam = new ArrayList<>();
@@ -54,6 +56,8 @@ public class SearchRepository {
 
                                 AirportNotam snowtam = notamResponse.getFirstSnowtam();
                                 listAirportNotam.add(snowtam);
+                                Log.d("SearchRepository","reponse : "+snowtam.toString());
+
                             }
                         }
 

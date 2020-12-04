@@ -18,12 +18,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.snowtam.io.R;
+import com.snowtam.io.data.repository.SearchRepository;
 import com.snowtam.io.ui.main.adapter.DataAdapterRecentResearch;
 import com.snowtam.io.ui.main.adapter.DataAdapterSearch;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainFragment extends Fragment {
 
@@ -60,7 +63,7 @@ public class MainFragment extends Fragment {
         initComponent(view);
 
         // we are null to display the fist EditText search
-        list_et_search.add(null);
+        list_et_search.add(new String());
 
         list_recent_research.add(null);
         list_recent_research.add(null);
@@ -76,7 +79,7 @@ public class MainFragment extends Fragment {
         buttonAddSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                list_et_search.add(null);
+                list_et_search.add(new String());
                 dataAdapterSearch.notifyDataSetChanged();
             }
         });
@@ -84,6 +87,16 @@ public class MainFragment extends Fragment {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                List<String> codeAirport = new ArrayList<String>();
+                List<String> outputCode = new ArrayList<>();
+
+                for (String code: dataAdapterSearch.mData) {
+                    if(!code.isEmpty()){
+                        outputCode.add(code.toUpperCase());
+                    }
+                }
+                Toast.makeText(getContext(),outputCode.toString(),Toast.LENGTH_LONG).show();
+
                 Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_resultFragment);
             }
         });
