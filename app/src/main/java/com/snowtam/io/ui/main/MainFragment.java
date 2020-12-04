@@ -87,6 +87,7 @@ public class MainFragment extends Fragment {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 List<String> codeAirport = new ArrayList<String>();
                 List<String> outputCode = new ArrayList<>();
 

@@ -52,7 +52,7 @@ public class ResultFragment extends Fragment {
                 37.4103143,
                 rawSnowtam);
 
-        ArrayList<AirportNotam> airportNotams = new ArrayList<>();
+        List<AirportNotam> airportNotams = new ArrayList<>();
         airportNotams.add(airportNotam);
         airportNotams.add(airportNotam);
 
