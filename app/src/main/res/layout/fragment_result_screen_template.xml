@@ -102,7 +102,7 @@
     <ImageView
         android:id="@+id/imageView_swipe"
         android:layout_width="0dp"
-        android:layout_height="15dp"
+        android:layout_height="10dp"
         android:background="@drawable/shape_iv_swipe_up"
         app:layout_constraintBottom_toTopOf="@id/map"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,5 +117,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewFullscreen"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="5dp"
+        android:src="@drawable/fullscreen"
+        app:layout_constraintStart_toStartOf="@+id/imageView_swipe"
+        app:layout_constraintTop_toTopOf="@+id/map" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
