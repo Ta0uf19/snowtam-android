@@ -3,6 +3,7 @@ package com.snowtam.io.ui.main;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -88,17 +89,27 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                List<String> codeAirport = new ArrayList<String>();
-                List<String> outputCode = new ArrayList<>();
+                StringBuilder outputCode= new StringBuilder();
+
 
                 for (String code: dataAdapterSearch.mData) {
                     if(!code.isEmpty()){
-                        outputCode.add(code.toUpperCase());
+                        outputCode.append(code.toUpperCase()).append(",");
                     }
                 }
-                Toast.makeText(getContext(),outputCode.toString(),Toast.LENGTH_LONG).show();
+                if(outputCode.length() > 0)
+                {
+                    view.clearFocus();
 
-                Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_resultFragment);
+                    outputCode.deleteCharAt(outputCode.length()-1);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("codes", outputCode.toString());
+                    Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_resultFragment,bundle);
+                }else{
+                    Toast.makeText(getContext(),"please entre at least one valid code",Toast.LENGTH_LONG).show();
+                }
+
+
             }
         });
 
