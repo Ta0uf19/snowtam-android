@@ -90,13 +90,21 @@ public class MainFragment extends Fragment {
             public void onClick(View v) {
 
                 StringBuilder outputCode= new StringBuilder();
-
+                StringBuilder errormsg = new StringBuilder();
+                errormsg.append("invalid codes : ");
 
                 for (String code: dataAdapterSearch.mData) {
-                    if(!code.isEmpty()){
+                    if(code.length() == 4){
                         outputCode.append(code.toUpperCase()).append(",");
+                    }else{
+                        errormsg.append(code).append(", ");
                     }
+
                 }
+
+                errormsg.deleteCharAt(outputCode.length()-1);
+                Toast.makeText(getContext(),errormsg,Toast.LENGTH_LONG).show();
+
                 if(outputCode.length() > 0)
                 {
                     view.clearFocus();

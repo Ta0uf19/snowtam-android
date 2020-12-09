@@ -2,9 +2,11 @@ package com.snowtam.io.ui.result;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.util.Log;
@@ -59,6 +61,7 @@ public class ResultFragment extends Fragment {
                     resultViewModel.mystate.setValue(ResultViewModel.State.error);
                 else
                     resultViewModel.mystate.setValue(ResultViewModel.State.done);
+
                 //create adapter for the viewPager
                 Log.d("ResultFragment","onChanged called");
                 Log.d("ResultFragment",airportNotams.toString());
@@ -67,13 +70,18 @@ public class ResultFragment extends Fragment {
                 ArrayList<ImageView> indicators = new ArrayList<>();
                 LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.linearLayout_indicators);
 
-                for (AirportNotam raw:
-                        airportNotams) {
-                    fragmentList.add(new ResultScreenTemplate(raw));
-                    ImageView indicator = createIndicator();
-                    indicators.add(indicator);
-                    linearLayout.addView(indicator);
+                for (AirportNotam raw: airportNotams) {
+                    if(raw != null){
+                        fragmentList.add(new ResultScreenTemplate(raw));
+                        ImageView indicator = createIndicator();
+                        indicators.add(indicator);
+                        linearLayout.addView(indicator);
+                    }
+                }
 
+                if(fragmentList.isEmpty()){
+                    Toast.makeText(getContext(),"the codes provided are not airport codes",Toast.LENGTH_LONG).show();
+                    getActivity().onBackPressed();
                 }
 
                 ViewPagerAdapter adapter = new ViewPagerAdapter(
