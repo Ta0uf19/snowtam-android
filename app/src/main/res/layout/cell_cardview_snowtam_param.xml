@@ -24,7 +24,7 @@
 
             <ImageView
                 android:id="@+id/imageView_icon"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:rotation="0"
                 app:layout_constraintStart_toStartOf="parent"

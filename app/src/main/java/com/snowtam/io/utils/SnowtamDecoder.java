@@ -114,7 +114,7 @@ public final class SnowtamDecoder {
      */
     private SnowtamItem processingSnowtam(String attr, String value) {
 
-        String picture = ("attr_" + attr + ".png").toLowerCase();
+        String picture = ("attr_"+attr).toLowerCase();
         // create object
         SnowtamItem snowtamItem = new SnowtamItem(attr, value, picture);
 
