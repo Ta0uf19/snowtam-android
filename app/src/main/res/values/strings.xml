@@ -25,4 +25,15 @@
     <string name="error_message_code_format">\nTheses codes do not respect the code format :\n</string>
     <string name="error_message_not_exist_api">\nTheses codes do not exist in the API :\n</string>
     <string name="errors">"Errors "</string>
+    <string name="Aerodrome">Aerodrome</string>
+    <string name="name_date_observation">Date observation</string>
+    <string name="runway">Runway</string>
+    <string name="name_cleared_runway_length">Cleared runway length</string>
+    <string name="cleared_runway_width">Cleared runway width</string>
+    <string name="threshold">"Threshold: "</string>
+    <string name="mid_runway">"Mid runway: "</string>
+    <string name="roll_out">"Roll out: "</string>
+    <string name="not_measured">"Not measured "</string>
+    <string name="avrage_thichness">Epaisseur moyenne (mm)</string>
+    <string name="friction_coefficient">"Friction coefficient "</string>
 </resources>

@@ -23,7 +23,12 @@ public class SplashScreenFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_splashScreenFragment_to_mainFragment);
         },1000);
 
+        view.findViewById(R.id.mainSplash).setOnClickListener(
+                v-> Navigation.findNavController(view).navigate(R.id.action_splashScreenFragment_to_mainFragment));
+
         // Inflate the layout for this fragment
         return view;
     }
+
+
 }

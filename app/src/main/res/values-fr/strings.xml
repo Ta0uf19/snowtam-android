@@ -23,4 +23,15 @@
     <string name="error_message_not_exist_api">\nCes codes n\'existent pas dans l\'API:\n</string>
     <string name="errors">Les erreurs</string>
     <string name="map">La carte</string>
+    <string name="Aerodrome">Aérodrome</string>
+    <string name="name_date_observation">Date observation</string>
+    <string name="runway">Piste</string>
+    <string name="name_cleared_runway_length">"Longueur de piste dégagée "</string>
+    <string name="cleared_runway_width">"Largeur de piste dégagée "</string>
+    <string name="threshold">"Seuil: "</string>
+    <string name="mid_runway">"Milieu de piste: "</string>
+    <string name="roll_out">Sortir:</string>
+    <string name="not_measured">Non mésuré</string>
+    <string name="avrage_thichness">Medium thickness (mm)</string>
+    <string name="friction_coefficient">Coeff de frottement</string>
 </resources>
