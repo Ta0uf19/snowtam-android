@@ -90,31 +90,32 @@ public class MainFragment extends Fragment {
             public void onClick(View v) {
 
                 StringBuilder outputCode= new StringBuilder();
-                StringBuilder errormsg = new StringBuilder();
-                errormsg.append("invalid codes : ");
+                StringBuilder errorMsg = new StringBuilder();
+                boolean flagErrorExist = false;
 
                 for (String code: dataAdapterSearch.mData) {
                     if(code.length() == 4){
                         outputCode.append(code.toUpperCase()).append(",");
                     }else{
-                        errormsg.append(code).append(", ");
+                        errorMsg.append(code).append(",");
+                        flagErrorExist = true;
                     }
 
                 }
 
-                errormsg.deleteCharAt(outputCode.length()-1);
-                Toast.makeText(getContext(),errormsg,Toast.LENGTH_LONG).show();
-
                 if(outputCode.length() > 0)
                 {
                     view.clearFocus();
-
                     outputCode.deleteCharAt(outputCode.length()-1);
                     Bundle bundle = new Bundle();
                     bundle.putString("codes", outputCode.toString());
+                    if(flagErrorExist){
+                        errorMsg.deleteCharAt(errorMsg.length()-1);
+                        bundle.putString("errorMsg", String.valueOf(errorMsg));
+                    }
                     Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_resultFragment,bundle);
                 }else{
-                    Toast.makeText(getContext(),"please entre at least one valid code",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"please enter at least one valid code",Toast.LENGTH_LONG).show();
                 }
 
 
