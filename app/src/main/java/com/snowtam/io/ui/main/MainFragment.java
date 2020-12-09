@@ -34,7 +34,7 @@ public class MainFragment extends Fragment {
     private MainViewModel mViewModel;
     //list of strings coming from the ViewModel , this list contains the codes that we are going to search
     private ArrayList<String> list_et_search = new ArrayList<>();
-    //list of Airport coming from the ViewModel (TODO change with SearchWithAirports)
+    //list of Airport coming from the ViewModel
     private ArrayList<String> list_recent_research = new ArrayList<>();
 
 
