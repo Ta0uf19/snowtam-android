@@ -16,7 +16,7 @@
         android:drawableStart="@drawable/ic_search"
         android:drawablePadding="15dp"
         android:ems="10"
-        android:hint="Search"
+        android:hint="@string/search"
         android:imeOptions="actionNext"
         android:inputType="text"
         android:maxLines="1"

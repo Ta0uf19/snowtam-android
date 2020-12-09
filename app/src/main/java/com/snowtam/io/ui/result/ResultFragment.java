@@ -1,8 +1,6 @@
 package com.snowtam.io.ui.result;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -15,7 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -48,15 +46,16 @@ public class ResultFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_result, container, false);
 
         errorMsg = new ArrayList<>();
-
+        List<String> codes = new ArrayList<>();
         //Create n Fragment(ResultScreenTemplate) and insert snowtam to display
-        List<String> codes = Arrays.asList(getArguments().getString("codes").split(","));
+        if(getArguments().getString("codes") !=null)
+            codes = Arrays.asList(getArguments().getString("codes").split(","));
         if(getArguments().getString("errorMsg") !=null)
-        errorMsg = Arrays.asList(getArguments().getString("errorMsg").split(","));
+            errorMsg = Arrays.asList(getArguments().getString("errorMsg").split(","));
         errorCodes = new ArrayList<>(codes);
 
-        viewPager = (ViewPager2)view.findViewById(R.id.viewPager);
-        imageViewError=(ImageView)view.findViewById(R.id.imageViewError);
+        viewPager = view.findViewById(R.id.viewPager);
+        imageViewError= view.findViewById(R.id.imageViewError);
         progressBarLoading = view.findViewById(R.id.progressBar_loading);
 
 
@@ -79,7 +78,7 @@ public class ResultFragment extends Fragment {
 
                 ArrayList<Fragment> fragmentList = new ArrayList<>();
                 ArrayList<ImageView> indicators = new ArrayList<>();
-                LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.linearLayout_indicators);
+                LinearLayout linearLayout = view.findViewById(R.id.linearLayout_indicators);
 
                 for (AirportNotam raw: airportNotams) {
                     if(raw != null){
@@ -92,7 +91,7 @@ public class ResultFragment extends Fragment {
                 }
 
                 if(fragmentList.isEmpty()){
-                    Toast.makeText(getContext(),"the codes provided are not airport codes",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.message_error_airport_code,Toast.LENGTH_LONG).show();
                     getActivity().onBackPressed();
                 }
 
@@ -121,21 +120,18 @@ public class ResultFragment extends Fragment {
             }
         });
 
-        resultViewModel.mystate.observe(getViewLifecycleOwner(), new Observer<ResultViewModel.State>() {
-            @Override
-            public void onChanged(ResultViewModel.State state) {
-                switch (state){
-                    case loading:
-                        progressBarLoading.setVisibility(View.VISIBLE);
-                        break;
-                    case done:
-                        progressBarLoading.setVisibility(View.INVISIBLE);
-                        break;
-                    case error:
-                        progressBarLoading.setVisibility(View.INVISIBLE);
-                        Toast.makeText(getContext(),"something went wrong",Toast.LENGTH_LONG).show();
-                        break;
-                }
+        resultViewModel.mystate.observe(getViewLifecycleOwner(), state -> {
+            switch (state){
+                case loading:
+                    progressBarLoading.setVisibility(View.VISIBLE);
+                    break;
+                case done:
+                    progressBarLoading.setVisibility(View.INVISIBLE);
+                    break;
+                case error:
+                    progressBarLoading.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getContext(), R.string.error_message_something_went_wrong,Toast.LENGTH_LONG).show();
+                    break;
             }
         });
 
@@ -157,7 +153,7 @@ public class ResultFragment extends Fragment {
         //create error message
         if(!errorMsg.isEmpty()){
 
-            error.append("\nTheses codes do not respect the code format :\n");
+            error.append(getString(R.string.error_message_code_format));
 
             for (String msg:errorMsg
                  ) {
@@ -166,7 +162,7 @@ public class ResultFragment extends Fragment {
 
         }
         if(!errorCodes.isEmpty()){
-            error.append("\ntheses codes do not exist in the API :\n");
+            error.append(getString(R.string.error_message_not_exist_api));
 
             for (String msg:errorCodes
             ) {
@@ -178,12 +174,7 @@ public class ResultFragment extends Fragment {
         imageViewError.setVisibility(View.VISIBLE);
 
         //create error pop up
-        imageViewError.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showErrorDialog(error.toString());
-            }
-        });
+        imageViewError.setOnClickListener(v -> showErrorDialog(error.toString()));
     }
     public void showErrorDialog(String errorMessage) {
 
@@ -192,7 +183,7 @@ public class ResultFragment extends Fragment {
         LinearLayout layout = new LinearLayout(getContext());
 
         TextView tvTitle = new TextView(getContext());
-        tvTitle.setText("Error report");
+        tvTitle.setText(R.string.Error_report_title);
         tvTitle.setPadding(20, 30, 20, 30);
         tvTitle.setTextSize(20F);
         tvTitle.setTextColor(Color.BLACK);

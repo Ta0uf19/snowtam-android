@@ -15,7 +15,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="5dp"
-        android:text="London"
+        android:text="@string/airport_name"
         android:maxLines="1"
         android:textColor="@color/TextColorDark"
         android:textSize="24sp"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="116dp"
-        android:text="Map"
+        android:text="@string/map"
         android:textColor="@color/TextColorDark"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="32dp"
-        android:text="Raw"
+        android:text="@string/raw"
         android:textColor="@color/TextColorDark"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +70,7 @@
             android:layout_height="0dp"
             android:background="@drawable/shape_cv_recent_research"
             android:padding="16dp"
-            android:text="raw"
+            android:text="@string/raw"
             android:textColor="@color/TextColorDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -126,6 +126,7 @@
         android:layout_margin="5dp"
         android:src="@drawable/fullscreen"
         app:layout_constraintStart_toStartOf="@+id/imageView_swipe"
-        app:layout_constraintTop_toTopOf="@+id/map" />
+        app:layout_constraintTop_toTopOf="@+id/map"
+        android:contentDescription="@string/full_screen" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
