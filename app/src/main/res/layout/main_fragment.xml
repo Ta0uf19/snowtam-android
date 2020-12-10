@@ -19,7 +19,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/home_background"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.25"
-        tools:visibility="invisible" />
+        tools:visibility="invisible"
+        android:contentDescription="@string/decoration" />
 
     <ImageView
         android:id="@+id/imageView_cloud1"
@@ -50,7 +51,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.050000012"
-        tools:visibility="invisible" />
+        tools:visibility="invisible"
+        android:contentDescription="@string/decoration"  />
 
     <ImageView
         android:id="@+id/imageView_cloud2"
@@ -63,7 +65,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.100000024"
-        tools:visibility="invisible" />
+        tools:visibility="invisible"
+        android:contentDescription="@string/decoration" />
 
     <ImageView
         android:id="@+id/imageView_cloud4"
@@ -76,7 +79,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3"
-        tools:visibility="invisible" />
+        tools:visibility="invisible"
+        android:contentDescription="@string/decoration"  />
 
     <ImageView
         android:id="@+id/imageView_cloud3"
@@ -89,7 +93,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.238"
-        tools:visibility="invisible" />
+        tools:visibility="invisible"
+        android:contentDescription="@string/decoration"  />
 
     <TextView
         android:id="@+id/textView_welcome"
@@ -97,7 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:text="Welcome to"
+        android:text="@string/welcome_to"
         android:textColor="@color/TextColorDark"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:text="Recent research"
+        android:text="@string/recent_research"
         android:textColor="@color/TextColorDark"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,7 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
-        android:text="some text to explain what does the application do"
+        android:text="@string/explain_what_does_the_application_do"
         android:textColor="@color/textDescriptionVeryLight"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -135,7 +140,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
-        android:text="SnowTam"
+        android:text="@string/snowtam"
         android:textColor="@color/TextColorDark"
         android:textSize="38sp"
         android:textStyle="bold"
@@ -165,9 +170,8 @@
         android:alpha="0"
         android:background="@drawable/shape_add_et_search"
         android:drawableEnd="@drawable/ic_add"
-        android:paddingEnd="15dp"
         android:textAllCaps="false"
-        android:text="Add"
+        android:text="@string/add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/containerLayout" />
@@ -181,8 +185,7 @@
         android:layout_marginEnd="32dp"
         android:alpha="0"
         android:background="@drawable/shape_cv_recent_research"
-        android:paddingEnd="15dp"
-        android:text="Search"
+        android:text="@string/submit"
         android:textAllCaps="false"
         android:textColor="@color/TextColorBlue"
         app:layout_constraintEnd_toEndOf="parent"

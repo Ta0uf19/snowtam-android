@@ -12,8 +12,15 @@ import androidx.lifecycle.ViewModel;
 
 public class ResultViewModel extends ViewModel {
 
+    public enum State{
+        loading,
+        error,
+        done
+    }
+
     public LiveData<List<AirportNotam>> readAllData ;
     private SearchRepository repository;
+    public MutableLiveData<State> mystate = new MutableLiveData<State>();
 
     public ResultViewModel(){
         repository = new SearchRepository();
@@ -21,6 +28,7 @@ public class ResultViewModel extends ViewModel {
     }
 
     public LiveData<List<AirportNotam>> searchListAirportNotam(List<String> codesAirports){
+        mystate.setValue(State.loading);
         return repository.search(codesAirports);
     }
 

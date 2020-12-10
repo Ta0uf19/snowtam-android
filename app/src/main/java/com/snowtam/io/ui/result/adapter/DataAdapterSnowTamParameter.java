@@ -1,6 +1,7 @@
 package com.snowtam.io.ui.result.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ public class DataAdapterSnowTamParameter extends RecyclerView.Adapter<DataAdapte
     private static final String TAG = "DataAdapterSnowTamParameter";
 
     Context mContext;
-    public List<SnowtamItem> mData; // todo change object with snowtamParams
+    public List<SnowtamItem> mData;
 
     public DataAdapterSnowTamParameter(Context mContext, List<SnowtamItem> mData) {
         this.mContext = mContext;
@@ -43,11 +44,11 @@ public class DataAdapterSnowTamParameter extends RecyclerView.Adapter<DataAdapte
 
     @Override
     public void onBindViewHolder(@NonNull final myViewHolder myViewHolder, final int i) {
-        //TODO change the hard coded text
         final SnowtamItem snowtamItem = mData.get(i);
         myViewHolder.tv_key.setText(snowtamItem.getName());
         myViewHolder.tv_value.setText(snowtamItem.getValue());
-        myViewHolder.iv_icon.setImageResource(R.drawable.ic_calendar); // TODO change it to dynamic
+        int d = mContext.getResources().getIdentifier(snowtamItem.getPicture(), "drawable", mContext.getPackageName());
+        myViewHolder.iv_icon.setImageResource(d);
 
     }
 

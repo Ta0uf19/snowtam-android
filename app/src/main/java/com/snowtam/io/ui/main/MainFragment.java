@@ -1,19 +1,11 @@
 package com.snowtam.io.ui.main;
 
+
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.lifecycle.ViewModelProvider;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,8 +21,19 @@ import com.snowtam.io.R;
 import com.snowtam.io.ui.main.adapter.DataAdapterRecentResearch;
 
 import java.util.ArrayList;
+
 import java.util.LinkedList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.motion.widget.MotionLayout;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 
 public class MainFragment extends Fragment {
 
@@ -63,7 +66,7 @@ public class MainFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         initComponent(view);
-
+    
         adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, listSearch);
         textSearch = (AutoCompleteTextView) view.findViewById(R.id.textSearch);
         textSearch.setOnTouchListener(new View.OnTouchListener() {
@@ -92,8 +95,35 @@ public class MainFragment extends Fragment {
                 // Add first search text element
                 list.addFirst(textSearch.getText().toString().toUpperCase());
 
-                Toast.makeText(getContext(), list.toString(),Toast.LENGTH_LONG).show();
-                Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_resultFragment);
+
+                StringBuilder outputCode = new StringBuilder();
+                StringBuilder errorMsg = new StringBuilder();
+                boolean flagErrorExist = false;
+
+                for (String code : list) {
+                    if (code.length() == 4) {
+                        outputCode.append(code.toUpperCase()).append(",");
+                    } else {
+                        errorMsg.append(code).append(",");
+                        flagErrorExist = true;
+                    }
+                }
+
+                if (outputCode.length() > 0) {
+                    view.clearFocus();
+                    outputCode.deleteCharAt(outputCode.length() - 1);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("codes", outputCode.toString());
+                    if (flagErrorExist) {
+                        errorMsg.deleteCharAt(errorMsg.length() - 1);
+                        bundle.putString("errorMsg", String.valueOf(errorMsg));
+                    }
+                    Log.d("main", outputCode.toString());
+
+                    Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_resultFragment, bundle);
+                } else {
+                    Toast.makeText(getContext(), "erreur", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -101,10 +131,10 @@ public class MainFragment extends Fragment {
     }
 
     private void initComponent(View view) {
+
         motionLayout = (MotionLayout) view.findViewById(R.id.mainResultFragment);
         buttonSubmit = (Button) view.findViewById(R.id.button_submit);
         recyclerViewRecentResearch = (RecyclerView) view.findViewById(R.id.recyclerView_editText_recent_research);
-
         recyclerViewRecentResearch.setHasFixedSize(true);
         LinearLayoutManager layoutManagerRecentResearch = new LinearLayoutManager(getActivity());
         recyclerViewRecentResearch.setLayoutManager(layoutManagerRecentResearch);

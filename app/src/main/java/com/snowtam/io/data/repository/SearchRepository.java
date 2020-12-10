@@ -73,6 +73,11 @@ public class SearchRepository {
                         @Override
                         public void onFailure(Call<NotamResponse> call, Throwable t) {
                             System.out.println(call.toString());
+                            inc[0]++;
+
+                            if(inc[0] == elem) {
+                                data.setValue(listAirportNotam);
+                            }
                         }
                     });
         }

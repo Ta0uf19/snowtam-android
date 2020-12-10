@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,7 +15,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="5dp"
-        android:text="London"
+        android:text="@string/airport_name"
         android:maxLines="1"
         android:textColor="@color/TextColorDark"
         android:textSize="24sp"
@@ -30,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="116dp"
-        android:text="Map"
+        android:text="@string/map"
         android:textColor="@color/TextColorDark"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -43,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="32dp"
-        android:text="Raw"
+        android:text="@string/raw"
         android:textColor="@color/TextColorDark"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,9 +55,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/textView_map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +70,7 @@
             android:layout_height="0dp"
             android:background="@drawable/shape_cv_recent_research"
             android:padding="16dp"
-            android:text="raw"
+            android:text="@string/raw"
             android:textColor="@color/TextColorDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -84,9 +85,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/textView_map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +103,7 @@
     <ImageView
         android:id="@+id/imageView_swipe"
         android:layout_width="0dp"
-        android:layout_height="15dp"
+        android:layout_height="10dp"
         android:background="@drawable/shape_iv_swipe_up"
         app:layout_constraintBottom_toTopOf="@id/map"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,5 +118,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewFullscreen"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="5dp"
+        android:src="@drawable/fullscreen"
+        app:layout_constraintStart_toStartOf="@+id/imageView_swipe"
+        app:layout_constraintTop_toTopOf="@+id/map"
+        android:contentDescription="@string/full_screen" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -58,17 +59,16 @@ public class ResultScreenTemplate extends Fragment implements OnMapReadyCallback
         View view = inflater.inflate(R.layout.fragment_result_screen_template, container, false);
 
         switchRaw = (SwitchCompat) view.findViewById(R.id.switch_raw);
-
         layoutRaw = (ConstraintLayout) view.findViewById(R.id.constraintLayout_raw);
         layoutPretty = (ConstraintLayout) view.findViewById(R.id.constraintLayout_pretty);
+        fragmentMap = (FragmentContainerView) view.findViewById(R.id.map);
 
         tvTitle = view.findViewById(R.id.textView_airport_name);
         tvRawSnowTam = view.findViewById(R.id.textView_raw_snowtam);
 
+        if(airportNotam.getName() != null)
         tvTitle.setText(airportNotam.getName());
         tvRawSnowTam.setText(airportNotam.getRawSnowtam());
-
-        fragmentMap = (FragmentContainerView) view.findViewById(R.id.map);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
@@ -126,6 +126,7 @@ public class ResultScreenTemplate extends Fragment implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position,20));
         mMap.getUiSettings().setScrollGesturesEnabled(false);
         mMap.getUiSettings().setZoomGesturesEnabled(false);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
     }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="parameter_icon">"Icône de paramètre "</string>
+    <string name="Parameter_name">Date</string>
+    <string name="parameter_value">Dec 20.2020</string>
+    <string name="full_screen">"Plein écran "</string>
+    <string name="raw">Brute</string>
+    <string name="airport_name">London</string>
+    <string name="background">Le fond</string>
+    <string name="decoration">"Décoration "</string>
+    <string name="welcome_to">"Bienvenue à "</string>
+    <string name="recent_research">"Recherche récente "</string>
+    <string name="add">"Ajouter "</string>
+    <string name="submit">"Soumettre "</string>
+    <string name="search">Recherche</string>
+    <string name="Error_report_title">Rapport d\'erreur</string>
+    <string name="message_error_airport_code">"Les codes fournis ne sont pas des codes d'aéroport "</string>
+    <string name="explain_what_does_the_application_do">"Du texte pour expliquer ce que fait l'application "</string>
+    <string name="snowtam">SnowTam</string>
+    <string name="message_error_enter_at_least_one_code">"Veuillez saisir au moins un code valide "</string>
+    <string name="error_message_something_went_wrong">"Quelque chose s'est mal passé "</string>
+    <string name="error_message_code_format">\nCes codes ne respectent pas le format du code:\n</string>
+    <string name="error_message_not_exist_api">\nCes codes n\'existent pas dans l\'API:\n</string>
+    <string name="errors">Les erreurs</string>
+    <string name="map">La carte</string>
+    <string name="Aerodrome">Aérodrome</string>
+    <string name="name_date_observation">Date observation</string>
+    <string name="runway">Piste</string>
+    <string name="name_cleared_runway_length">"Longueur de piste dégagée "</string>
+    <string name="cleared_runway_width">"Largeur de piste dégagée "</string>
+    <string name="threshold">"Seuil: "</string>
+    <string name="mid_runway">"Milieu de piste: "</string>
+    <string name="roll_out">Sortir:</string>
+    <string name="not_measured">Non mésuré</string>
+    <string name="avrage_thichness">Medium thickness (mm)</string>
+    <string name="friction_coefficient">Coeff de frottement</string>
+</resources>

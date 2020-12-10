@@ -9,10 +9,9 @@
         motion:duration="1000">
        <KeyFrameSet>
        </KeyFrameSet>
-        <OnSwipe
-            motion:touchAnchorId="@id/imageView_swipe"
-            motion:touchRegionId="@id/imageView_swipe"
-            motion:onTouchUp="autoComplete" />
+        <OnClick
+            motion:clickAction="toggle"
+            motion:targetId="@+id/imageViewFullscreen"/>
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -31,7 +30,7 @@
             />
         <Constraint
             android:id="@+id/imageView_swipe"
-            android:layout_height="15dp"
+            android:layout_height="10dp"
             android:layout_width="0dp"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintBottom_toTopOf="@id/map"

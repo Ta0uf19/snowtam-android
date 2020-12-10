@@ -1,6 +1,9 @@
 package com.snowtam.io.utils;
 
+import android.content.res.Resources;
+
 import com.snowtam.io.App;
+import com.snowtam.io.R;
 import com.snowtam.io.data.local.entity.decoder.Friction;
 import com.snowtam.io.data.local.entity.decoder.SnowtamItem;
 import com.snowtam.io.data.local.entity.decoder.RunwayStates;
@@ -17,10 +20,14 @@ public final class SnowtamDecoder {
     // A -> value
     private List<SnowtamItem> list;
     private String codedString;
+    private Resources resources;
+
 
     private SnowtamDecoder(String coded) {
         this.list = new ArrayList<SnowtamItem>();
         this.codedString = coded;
+        resources = App.getInstance().getApplicationContext().getResources();
+
     }
 
 
@@ -115,7 +122,7 @@ public final class SnowtamDecoder {
      */
     private SnowtamItem processingSnowtam(String attr, String value) {
 
-        String picture = ("attr_" + attr + ".png").toLowerCase();
+        String picture = ("attr_"+attr).toLowerCase();
         // create object
         SnowtamItem snowtamItem = new SnowtamItem(attr, value, picture);
 
@@ -125,7 +132,7 @@ public final class SnowtamDecoder {
         switch (snowtamItem.getAttr()) {
             case "A":
 
-                snowtamItem.setName("Aérodrome");
+                snowtamItem.setName(resources.getString(R.string.Aerodrome));
                 snowtamItem.setValue(value);
                 break;
 
@@ -140,12 +147,12 @@ public final class SnowtamDecoder {
                 }
                 date.setYear(new Date().getYear());
                 snowtamItem.setValue(date.toString());
-                snowtamItem.setName("Date observation");
+                snowtamItem.setName(resources.getString(R.string.name_date_observation));
 
                 break;
             case "C":
-                snowtamItem.setName("Piste");
-                snowtamItem.setValue("Runway "  + value);
+                snowtamItem.setName(resources.getString(R.string.runway));
+                snowtamItem.setValue(resources.getString(R.string.runway)  + value);
                 break;
             case "D":
                 /*
@@ -158,8 +165,8 @@ public final class SnowtamDecoder {
                 break;
             case "E":
                 // E LARGEUR DÉBLAYÉE SI INFÉRIEURE A LA LARGEUR DE PISTE PUBLIÉE (en m, si décalée à gauche ou à droite par rapport à l'axe, ajouter "L" ou "R" après les chiffres)
-                snowtamItem.setValue("CLEARED RUNWAY WIDTH " + value);
-                snowtamItem.setName("Cleared runway length");
+                snowtamItem.setValue(resources.getString(R.string.cleared_runway_width) + value);
+                snowtamItem.setName(resources.getString(R.string.name_cleared_runway_length));
 
                 break;
 
@@ -171,9 +178,9 @@ public final class SnowtamDecoder {
                 builder = new StringBuilder();
 
                 for(int i = 0; i < split.length; i++) {
-                    if(i == 0)builder.append("Threshold: ");
-                    if(i == 1)builder.append("Mid runway: ");
-                    if(i == 2)builder.append("Roll out: ");
+                    if(i == 0)builder.append(resources.getString(R.string.threshold));
+                    if(i == 1)builder.append(resources.getString(R.string.mid_runway));
+                    if(i == 2)builder.append(resources.getString(R.string.roll_out));
                     // append state of runway
                     builder.append(RunwayStates.getState(Integer.parseInt(split[i])));
                     builder.append(" / ");
@@ -190,21 +197,21 @@ public final class SnowtamDecoder {
                 builder = new StringBuilder();
                 //builder.append("MEAN DEPTH ");
                 for(int i = 0; i < split.length; i++) {
-                    if (i == 0) builder.append("Threshold: ");
-                    if (i == 1) builder.append("Mid runway: ");
-                    if (i == 2) builder.append("Roll out: ");
+                    if(i == 0)builder.append(resources.getString(R.string.threshold));
+                    if(i == 1)builder.append(resources.getString(R.string.mid_runway));
+                    if(i == 2)builder.append(resources.getString(R.string.roll_out));
 
                     if(split[i].compareTo("XX") != 0) {
                         builder.append(Integer.parseInt(split[i]));
                         builder.append("mm");
                     }
                     else {
-                        builder.append("Non mésuré");
+                        builder.append(resources.getString(R.string.not_measured));
                     }
                     builder.append(" / ");
                 }
                 snowtamItem.setValue(builder.toString());
-                snowtamItem.setName("ÉPAISSEUR MOYENNE (mm)");
+                snowtamItem.setName(resources.getString(R.string.avrage_thichness));
 
                 break;
             case "H":
@@ -214,9 +221,9 @@ public final class SnowtamDecoder {
                 builder = new StringBuilder();
                 //builder.append("BRAKING ACTION ");
                 for(int i = 0; i < split.length; i++) {
-                    if(i == 0)builder.append("Threshold: ");
-                    if(i == 1)builder.append("Mid runway: ");
-                    if(i == 2)builder.append("Roll out: ");
+                    if(i == 0)builder.append(resources.getString(R.string.threshold));
+                    if(i == 1)builder.append(resources.getString(R.string.mid_runway));
+                    if(i == 2)builder.append(resources.getString(R.string.roll_out));
                     // append state of runway
                     int score = Integer.parseInt(split[i]);
                     int pscore = 0;    // between 1 and 5
@@ -241,7 +248,7 @@ public final class SnowtamDecoder {
                 }
 
                 snowtamItem.setValue(builder.toString());
-                snowtamItem.setName("Coeff frottement");
+                snowtamItem.setName(resources.getString(R.string.friction_coefficient));
 
                 break;
             case "J":
