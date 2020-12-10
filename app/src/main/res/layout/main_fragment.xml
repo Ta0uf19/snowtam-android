@@ -119,7 +119,7 @@
         android:textColor="@color/TextColorDark"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView_editText_search" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutFor" />
 
     <TextView
         android:id="@+id/textView_app_description"
@@ -174,7 +174,7 @@
         android:text="@string/add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView_editText_search" />
+        app:layout_constraintTop_toBottomOf="@+id/containerLayout" />
 
     <Button
         android:id="@+id/button_submit"
@@ -191,6 +191,56 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_add_et_search" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayoutFor"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_app_description"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/textSearch"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/shape_et_search"
+
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="15dp"
+                android:ems="10"
+                android:hint="Search"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:selectAllOnFocus="true"
+
+                android:textColor="@color/TextColorDark"
+                android:textColorHint="@color/TextColorDark"
+                android:textCursorDrawable="@null"
+
+                android:layout_alignParentLeft="true" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/containerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"></LinearLayout>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_editText_recent_research"

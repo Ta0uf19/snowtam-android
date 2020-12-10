@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/editText_Search"
-
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginBottom="16dp"
