@@ -13,7 +13,7 @@
     <string name="decoration">Decoration</string>
     <string name="welcome_to">Welcome to</string>
     <string name="recent_research">Recent research</string>
-    <string name="explain_what_does_the_application_do">Some text to explain what does the application do</string>
+    <string name="explain_what_does_the_application_do">Search for your decoded snowtams with an ICAO code and a single click.</string>
     <string name="snowtam">SnowTam</string>
     <string name="add">Add</string>
     <string name="submit">Submit</string>

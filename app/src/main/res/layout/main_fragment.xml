@@ -117,6 +117,7 @@
         android:layout_marginTop="32dp"
         android:text="@string/recent_research"
         android:textColor="@color/TextColorDark"
+        android:alpha="0"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutFor" />
@@ -170,11 +171,12 @@
         android:alpha="0"
         android:background="@drawable/shape_add_et_search"
         android:drawableEnd="@drawable/ic_add"
+        android:paddingEnd="15dp"
         android:textAllCaps="false"
         android:text="@string/add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/containerLayout" />
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutFor" />
 
     <Button
         android:id="@+id/button_submit"
@@ -207,6 +209,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/relativeLayout_textSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -238,7 +241,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical" />
 
     </LinearLayout>
 
@@ -249,6 +252,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
+        android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_RecentResearch" />

@@ -15,7 +15,7 @@
     <string name="search">Recherche</string>
     <string name="Error_report_title">Rapport d\'erreur</string>
     <string name="message_error_airport_code">Nous n\'avons pas trouvé de snowtam pour ces aérodromes</string>
-    <string name="explain_what_does_the_application_do">"Du texte pour expliquer ce que fait l'application "</string>
+    <string name="explain_what_does_the_application_do">Cherchez vos snowtams décodés avec un code ICAO et un seul click.</string>
     <string name="snowtam">SnowTam</string>
     <string name="message_error_enter_at_least_one_code">"Veuillez saisir au moins un code valide "</string>
     <string name="error_message_something_went_wrong">"Quelque chose s'est mal passé "</string>
