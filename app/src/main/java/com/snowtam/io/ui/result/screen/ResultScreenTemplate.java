@@ -67,7 +67,10 @@ public class ResultScreenTemplate extends Fragment implements OnMapReadyCallback
         tvRawSnowTam = view.findViewById(R.id.textView_raw_snowtam);
 
         if(airportNotam.getName() != null)
-        tvTitle.setText(airportNotam.getName());
+            tvTitle.setText(airportNotam.getName());
+        else
+            tvTitle.setText(airportNotam.getAirportCode());
+
         tvRawSnowTam.setText(airportNotam.getRawSnowtam());
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.

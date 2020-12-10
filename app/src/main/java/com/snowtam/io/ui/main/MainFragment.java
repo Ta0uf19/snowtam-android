@@ -118,7 +118,6 @@ public class MainFragment extends Fragment {
                         errorMsg.deleteCharAt(errorMsg.length() - 1);
                         bundle.putString("errorMsg", String.valueOf(errorMsg));
                     }
-                    Log.d("main", outputCode.toString());
 
                     Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_resultFragment, bundle);
                 } else {

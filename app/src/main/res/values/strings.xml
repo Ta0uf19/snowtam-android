@@ -19,7 +19,7 @@
     <string name="submit">Submit</string>
     <string name="search">Search</string>
     <string name="Error_report_title">Error report</string>
-    <string name="message_error_airport_code">The codes provided are not airport codes</string>
+    <string name="message_error_airport_code">We didn\'t find any snowtam for these airports.</string>
     <string name="message_error_enter_at_least_one_code">Please enter at least one valid code</string>
     <string name="error_message_something_went_wrong">Something went wrong</string>
     <string name="error_message_code_format">\nTheses codes do not respect the code format :\n</string>

@@ -1,6 +1,7 @@
 package com.snowtam.io.utils;
 
 import android.content.res.Resources;
+import android.util.Log;
 
 import com.snowtam.io.App;
 import com.snowtam.io.R;
@@ -22,6 +23,7 @@ public final class SnowtamDecoder {
     private String codedString;
     private Resources resources;
 
+    private static final String TAG = "SnowtamDecoder";
 
     private SnowtamDecoder(String coded) {
         this.list = new ArrayList<SnowtamItem>();
@@ -182,7 +184,16 @@ public final class SnowtamDecoder {
                     if(i == 1)builder.append(resources.getString(R.string.mid_runway));
                     if(i == 2)builder.append(resources.getString(R.string.roll_out));
                     // append state of runway
-                    builder.append(RunwayStates.getState(Integer.parseInt(split[i])));
+
+                    RunwayStates runwayState = RunwayStates.UNKNOWN;
+                    try {
+                        runwayState = RunwayStates.getState(Integer.parseInt(split[i]));
+                    }
+                    catch (NumberFormatException e) {
+                        Log.e(TAG, e.getMessage());
+                    }
+
+                    builder.append(runwayState);
                     builder.append(" / ");
                 }
 
