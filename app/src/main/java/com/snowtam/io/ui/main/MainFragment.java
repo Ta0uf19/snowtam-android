@@ -3,6 +3,8 @@ package com.snowtam.io.ui.main;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,41 +18,41 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.snowtam.io.R;
-import com.snowtam.io.data.repository.SearchRepository;
 import com.snowtam.io.ui.main.adapter.DataAdapterRecentResearch;
-import com.snowtam.io.ui.main.adapter.DataAdapterSearch;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MainFragment extends Fragment {
 
     private MainViewModel mViewModel;
-    //list of strings coming from the ViewModel , this list contains the codes that we are going to search
-    private ArrayList<String> list_et_search = new ArrayList<>();
-    //list of Airport coming from the ViewModel (TODO change with SearchWithAirports)
     private ArrayList<String> list_recent_research = new ArrayList<>();
 
-
-    //components
     private MotionLayout motionLayout;
-    private EditText etSearch;
-    private Button buttonAddSearch;
     private Button buttonSubmit;
-    private DataAdapterSearch dataAdapterSearch;
-    private DataAdapterRecentResearch dataAdapterRecentResearch;
-    private RecyclerView recyclerViewSearch;
     private RecyclerView recyclerViewRecentResearch;
+    private DataAdapterRecentResearch dataAdapterRecentResearch;
+
+    private ArrayAdapter<String> adapter;
+    private List<String> listSearch = new ArrayList<String>();
+    private AutoCompleteTextView textSearch;
+    private LinearLayout containerLinear;
+    private Button buttonAdd;
 
     public static MainFragment newInstance() {
         return new MainFragment();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -62,42 +64,35 @@ public class MainFragment extends Fragment {
 
         initComponent(view);
 
-        // we are null to display the fist EditText search
-        list_et_search.add(new String());
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, listSearch);
+        textSearch = (AutoCompleteTextView) view.findViewById(R.id.textSearch);
+        textSearch.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                motionLayout.transitionToState(R.id.end);
+                return false;
+            }
+        });
+        buttonAdd = (Button)view.findViewById(R.id.button_add_et_search);
+        buttonAdd.setOnClickListener(this::addNewInput);
+        containerLinear = (LinearLayout) view.findViewById(R.id.containerLayout);
 
         list_recent_research.add(null);
         list_recent_research.add(null);
-
-        dataAdapterSearch = new DataAdapterSearch(getActivity(), list_et_search);
-        recyclerViewSearch.setAdapter(dataAdapterSearch);
 
         dataAdapterRecentResearch = new DataAdapterRecentResearch(getActivity(), list_recent_research);
         recyclerViewRecentResearch.setAdapter(dataAdapterRecentResearch);
-
-        recyclerViewSearch.addOnItemTouchListener(getTouchListener());
-
-        buttonAddSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                list_et_search.add(new String());
-                dataAdapterSearch.notifyDataSetChanged();
-            }
-        });
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                List<String> codeAirport = new ArrayList<String>();
-                List<String> outputCode = new ArrayList<>();
+                // Get all search
+                LinkedList<String> list = getListSearch();
+                // Add first search text element
+                list.addFirst(textSearch.getText().toString().toUpperCase());
 
-                for (String code: dataAdapterSearch.mData) {
-                    if(!code.isEmpty()){
-                        outputCode.add(code.toUpperCase());
-                    }
-                }
-                Toast.makeText(getContext(),outputCode.toString(),Toast.LENGTH_LONG).show();
-
+                Toast.makeText(getContext(), list.toString(),Toast.LENGTH_LONG).show();
                 Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_resultFragment);
             }
         });
@@ -107,42 +102,57 @@ public class MainFragment extends Fragment {
 
     private void initComponent(View view) {
         motionLayout = (MotionLayout) view.findViewById(R.id.mainResultFragment);
-
-        buttonAddSearch = (Button) view.findViewById(R.id.button_add_et_search);
         buttonSubmit = (Button) view.findViewById(R.id.button_submit);
-
-        recyclerViewSearch = (RecyclerView) view.findViewById(R.id.recyclerView_editText_search);
         recyclerViewRecentResearch = (RecyclerView) view.findViewById(R.id.recyclerView_editText_recent_research);
-
-        recyclerViewSearch.setHasFixedSize(true);
-        LinearLayoutManager layoutManagerSearch = new LinearLayoutManager(getActivity());
-        recyclerViewSearch.setLayoutManager(layoutManagerSearch);
 
         recyclerViewRecentResearch.setHasFixedSize(true);
         LinearLayoutManager layoutManagerRecentResearch = new LinearLayoutManager(getActivity());
         recyclerViewRecentResearch.setLayoutManager(layoutManagerRecentResearch);
     }
 
-    private RecyclerView.OnItemTouchListener getTouchListener() {
-        return new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                motionLayout.transitionToState(R.id.end);
-                return false;
-            }
+    /**
+     * Get list of added search value
+     * @return
+     */
+    private LinkedList<String> getListSearch(){
+        int childCount = containerLinear.getChildCount();
+        LinkedList<String> list = new LinkedList<String>();
 
-            @Override
-            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-            }
+        for(int i=0; i<childCount; i++){
+            View thisChild = containerLinear.getChildAt(i);
 
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+            AutoCompleteTextView childTextView = (AutoCompleteTextView) thisChild.findViewById(R.id.editText_Search);
+            String childTextViewValue = childTextView.getText().toString();
 
-            }
-        };
+            list.add(childTextViewValue.toUpperCase());
+        }
+        return list;
     }
 
+    /**
+     * Add new search input
+     */
+    private void addNewInput(View view) {
 
+        LayoutInflater layoutInflater = (LayoutInflater) view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        final View addView = layoutInflater.inflate(R.layout.row_edittext_search, null);
+        addView.setId(View.generateViewId());
+
+        AutoCompleteTextView textView = (AutoCompleteTextView)addView.findViewById(R.id.editText_Search);
+        textView.setAdapter(adapter);
+
+        ImageView buttonRemove = (ImageView)addView.findViewById(R.id.imageView_icon);
+        final View.OnClickListener removeListener = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                ((LinearLayout)addView.getParent()).removeView(addView);
+            }
+        };
+
+        buttonRemove.setOnClickListener(removeListener);
+        containerLinear.addView(addView);
+    }
 
 
 }

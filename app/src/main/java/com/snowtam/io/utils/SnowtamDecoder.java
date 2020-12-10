@@ -1,5 +1,6 @@
 package com.snowtam.io.utils;
 
+import com.snowtam.io.App;
 import com.snowtam.io.data.local.entity.decoder.Friction;
 import com.snowtam.io.data.local.entity.decoder.SnowtamItem;
 import com.snowtam.io.data.local.entity.decoder.RunwayStates;
