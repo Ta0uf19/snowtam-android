@@ -32,6 +32,6 @@
     <string name="mid_runway">"Milieu de piste: "</string>
     <string name="roll_out">Sortir:</string>
     <string name="not_measured">Non mésuré</string>
-    <string name="avrage_thichness">Medium thickness (mm)</string>
+    <string name="avrage_thichness">Epaisseur moyenne (mm)</string>
     <string name="friction_coefficient">Coeff de frottement</string>
 </resources>

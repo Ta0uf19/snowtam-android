@@ -9,6 +9,7 @@ import com.snowtam.io.data.local.entity.decoder.Friction;
 import com.snowtam.io.data.local.entity.decoder.SnowtamItem;
 import com.snowtam.io.data.local.entity.decoder.RunwayStates;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -141,6 +142,7 @@ public final class SnowtamDecoder {
             case "B":
                 // Date formating
                 SimpleDateFormat sdf = new SimpleDateFormat("MMddhhmm");
+                DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
                 Date date = null;
                 try {
                     date = sdf.parse(value);
@@ -148,13 +150,13 @@ public final class SnowtamDecoder {
                     e.printStackTrace();
                 }
                 date.setYear(new Date().getYear());
-                snowtamItem.setValue(date.toString());
+                snowtamItem.setValue(dateFormat.format(date));
                 snowtamItem.setName(resources.getString(R.string.name_date_observation));
 
                 break;
             case "C":
                 snowtamItem.setName(resources.getString(R.string.runway));
-                snowtamItem.setValue(resources.getString(R.string.runway)  + value);
+                snowtamItem.setValue(value);
                 break;
             case "D":
                 /*
