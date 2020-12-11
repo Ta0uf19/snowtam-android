@@ -21,7 +21,7 @@ public class SplashScreenFragment extends Fragment {
 
         new Handler().postDelayed(() -> {
                 Navigation.findNavController(view).navigate(R.id.action_splashScreenFragment_to_mainFragment);
-        },1000);
+        },2000);
 
         view.findViewById(R.id.mainSplash).setOnClickListener(
                 v-> Navigation.findNavController(view).navigate(R.id.action_splashScreenFragment_to_mainFragment));

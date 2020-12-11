@@ -61,7 +61,9 @@ public class ResultFragment extends Fragment {
 
         resultViewModel = new ViewModelProvider(getActivity()).get(ResultViewModel.class);
 
-        resultViewModel.searchListAirportNotam(codes).observe(getViewLifecycleOwner(),  new Observer<List<AirportNotam>>() {
+        resultViewModel.searchListAirportNotam(codes)
+                .observe(getViewLifecycleOwner(),
+                        new Observer<List<AirportNotam>>() {
 
             @Override
             public void onChanged(List<AirportNotam> airportNotams) {
@@ -108,7 +110,9 @@ public class ResultFragment extends Fragment {
                         super.onPageSelected(position);
                         for (int i = 0; i < indicators.size(); i++) {
                             indicators.get(i).setBackgroundResource(
-                                    i == position ? R.drawable.ic_indicator_selected : R.drawable.ic_indicator_unselected
+                                    i == position ?
+                                            R.drawable.ic_indicator_selected :
+                                            R.drawable.ic_indicator_unselected
                             );
                         }
                     }
