@@ -26,7 +26,7 @@
     <string name="error_message_not_exist_api">\nTheses codes do not exist in the API :\n</string>
     <string name="errors">Errors </string>
     <string name="Aerodrome">Aerodrome</string>
-    <string name="name_date_observation">Date observation</string>
+    <string name="name_date_observation">Observation date</string>
     <string name="runway">Runway</string>
     <string name="name_cleared_runway_length">Cleared runway length</string>
     <string name="cleared_runway_width">Cleared runway width</string>

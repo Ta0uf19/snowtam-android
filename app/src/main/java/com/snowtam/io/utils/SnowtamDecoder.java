@@ -137,8 +137,8 @@ public final class SnowtamDecoder {
 
                 snowtamItem.setName(resources.getString(R.string.Aerodrome));
                 snowtamItem.setValue(value);
-                break;
 
+                break;
             case "B":
                 // Date formating
                 SimpleDateFormat sdf = new SimpleDateFormat("MMddhhmm");
@@ -146,11 +146,11 @@ public final class SnowtamDecoder {
                 Date date = null;
                 try {
                     date = sdf.parse(value);
+                    date.setYear(new Date().getYear());
+                    snowtamItem.setValue(dateFormat.format(date));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                date.setYear(new Date().getYear());
-                snowtamItem.setValue(dateFormat.format(date));
                 snowtamItem.setName(resources.getString(R.string.name_date_observation));
 
                 break;
