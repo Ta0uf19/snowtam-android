@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<androidx.constraintlayout.motion.widget.MotionLayout
+
+    android:id="@+id/mainResultFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layoutDescription="@xml/main_fragment_scene"
     tools:context=".ui.main.MainFragment">
 
     <ImageView
@@ -12,11 +19,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/home_background"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="invisible" />
 
     <ImageView
         android:id="@+id/imageView_logoHome"
@@ -28,7 +36,9 @@
         app:layout_constraintHorizontal_bias="0.13"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.25"
+        tools:visibility="invisible"
+        android:contentDescription="@string/decoration" />
 
     <ImageView
         android:id="@+id/imageView_cloud1"
@@ -40,7 +50,9 @@
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.050000012" />
+        app:layout_constraintVertical_bias="0.050000012"
+        tools:visibility="invisible"
+        android:contentDescription="@string/decoration"  />
 
     <ImageView
         android:id="@+id/imageView_cloud2"
@@ -52,7 +64,9 @@
         app:layout_constraintHorizontal_bias="0.746"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.100000024" />
+        app:layout_constraintVertical_bias="0.100000024"
+        tools:visibility="invisible"
+        android:contentDescription="@string/decoration" />
 
     <ImageView
         android:id="@+id/imageView_cloud4"
@@ -64,7 +78,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.3"
+        tools:visibility="invisible"
+        android:contentDescription="@string/decoration"  />
 
     <ImageView
         android:id="@+id/imageView_cloud3"
@@ -76,7 +92,9 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.238" />
+        app:layout_constraintVertical_bias="0.238"
+        tools:visibility="invisible"
+        android:contentDescription="@string/decoration"  />
 
     <TextView
         android:id="@+id/textView_welcome"
@@ -84,11 +102,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:text="Welcome to"
+        android:text="@string/welcome_to"
         android:textColor="@color/TextColorDark"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_logoHome" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_logoHome"
+        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/textView_RecentResearch"
@@ -96,11 +115,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:text="Recent research"
+        android:text="@string/recent_research"
         android:textColor="@color/TextColorDark"
+        android:alpha="0"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutFor" />
 
     <TextView
         android:id="@+id/textView_app_description"
@@ -108,11 +128,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
-        android:text="some text to explain what does the application do"
+        android:text="@string/explain_what_does_the_application_do"
         android:textColor="@color/textDescriptionVeryLight"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_app_name" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_app_name"
+        tools:visibility="invisible" />
 
     <TextView
         android:id="@+id/textView_app_name"
@@ -120,29 +141,122 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
-        android:text="SnowTam"
+        android:text="@string/snowtam"
         android:textColor="@color/TextColorDark"
         android:textSize="38sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_welcome" />
 
-    <EditText
-        android:id="@+id/editTextSearch"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_editText_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/shape_et_search"
-        android:drawableStart="@drawable/ic_search"
-        android:ems="10"
-        android:hint="Search"
-        android:padding="10dp"
-        android:textColor="@color/TextColorDark"
-        android:textColorHint="@color/TextColorDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_app_description" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_app_description" >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/button_add_et_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:alpha="0"
+        android:background="@drawable/shape_add_et_search"
+        android:drawableEnd="@drawable/ic_add"
+        android:paddingEnd="15dp"
+        android:textAllCaps="false"
+        android:text="@string/add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutFor" />
+
+    <Button
+        android:id="@+id/button_submit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:alpha="0"
+        android:background="@drawable/shape_cv_recent_research"
+        android:text="@string/submit"
+        android:textAllCaps="false"
+        android:textColor="@color/TextColorBlue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_add_et_search" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayoutFor"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_app_description"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_textSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/textSearch"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/shape_et_search"
+
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="15dp"
+                android:ems="10"
+                android:hint="Search"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:selectAllOnFocus="true"
+
+                android:textColor="@color/TextColorDark"
+                android:textColorHint="@color/TextColorDark"
+                android:textCursorDrawable="@null"
+
+                android:layout_alignParentLeft="true" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/containerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_editText_recent_research"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:alpha="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_RecentResearch" />
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
+</ScrollView>

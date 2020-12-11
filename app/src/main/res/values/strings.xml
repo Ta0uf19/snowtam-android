@@ -1,3 +1,39 @@
 <resources>
-    <string name="app_name">Snowtam</string>
+    <string name="app_name" translatable="false">Snowtam</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="parameter_icon">Parameter icon</string>
+    <string name="Parameter_name">Date</string>
+    <string name="parameter_value">Dec 20.2020</string>
+    <string name="full_screen">Full screen</string>
+    <string name="map">Map</string>
+    <string name="raw">Raw</string>
+    <string name="airport_name">London</string>
+    <string name="background">Background</string>
+    <string name="decoration">Decoration</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="recent_research">Recent research</string>
+    <string name="explain_what_does_the_application_do">Search for your decoded snowtams with an ICAO code and a single click.</string>
+    <string name="snowtam">SnowTam</string>
+    <string name="add">Add</string>
+    <string name="submit">Submit</string>
+    <string name="search">Search</string>
+    <string name="Error_report_title">Error report</string>
+    <string name="message_error_airport_code">We didn\'t find any snowtam for these airports.</string>
+    <string name="message_error_enter_at_least_one_code">Please enter at least one valid code</string>
+    <string name="error_message_something_went_wrong">Something went wrong</string>
+    <string name="error_message_code_format">\nTheses codes do not respect the code format :\n</string>
+    <string name="error_message_not_exist_api">\nTheses codes do not exist in the API :\n</string>
+    <string name="errors">Errors </string>
+    <string name="Aerodrome">Aerodrome</string>
+    <string name="name_date_observation">Observation date</string>
+    <string name="runway">Runway</string>
+    <string name="name_cleared_runway_length">Cleared runway length</string>
+    <string name="cleared_runway_width">Cleared runway width</string>
+    <string name="threshold">Threshold: </string>
+    <string name="mid_runway">Mid runway: </string>
+    <string name="roll_out">Roll out: </string>
+    <string name="not_measured">"Not measured "</string>
+    <string name="avrage_thichness">Medium thickness (mm)</string>
+    <string name="friction_coefficient">Friction coefficient</string>
 </resources>

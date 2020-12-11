@@ -12,7 +12,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.jraska.livedata.TestObserver;
 import com.snowtam.io.data.local.AppDatabase;
 import com.snowtam.io.data.local.dao.SearchDao;
-import com.snowtam.io.data.local.entity.Airport;
+import com.snowtam.io.data.local.entity.AirportNotam;
 import com.snowtam.io.data.local.entity.Search;
 import com.snowtam.io.data.local.entity.SearchWithAirports;
 
@@ -48,9 +48,9 @@ public class SearchDatabaseTest {
     public void writeAndReadRecentSearch() throws Exception {
 
         // create list of airports
-        List<Airport> airports = new ArrayList<Airport>();
-        airports.add(new Airport("GMMN", "Aéroport de Casablanca Mohammed V", 38.299992, -89.022758));
-        airports.add(new Airport("VDM", "Aéroport VDM", 38.299992, -89.022758));
+        List<AirportNotam> airports = new ArrayList<AirportNotam>();
+        airports.add(new AirportNotam("GMMN", "MA", "Aéroport de Casablanca Mohammed V", 38.299992, -89.022758,""));
+        airports.add(new AirportNotam("VDM","MA", "Aéroport VDM", 38.299992, -89.022758,""));
 
         // insert search with airports
         Search search = new Search();
