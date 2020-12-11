@@ -16,7 +16,7 @@ it will search for SnowTam, decode them and display them via an interface. The a
 ## Libraries Used
 
 - [Android Architecture Components (MVVM, LiveData)](https://developer.android.com/topic/libraries/architecture/)
-- [Retrofit2](https://firebase.google.com/)
+- [Retrofit2](https://riptutorial.com/fr/retrofit2)
 - [Room](https://developer.android.com/topic/libraries/architecture/room)
 - [Navigation UI](https://developer.android.com/guide/navigation/navigation-getting-started)
 - [ViewPager2](https://developer.android.com/jetpack/androidx/releases/viewpager2)
